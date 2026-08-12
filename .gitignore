@@ -1,0 +1,73 @@
+# Python-generated files & caches
+__pycache__/
+*.py[oc]
+*.pyo
+*.pyd
+build/
+dist/
+wheels/
+*.egg-info/
+.pytest_cache/
+.uv-cache/
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Crawler SQLite DBs & state
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Large corpus files, JSONL datasets, and raw books
+*.jsonl
+*.jsonl.gz
+*.tar.gz
+*.tar
+*.zip
+*.7z
+*.rar
+*.parquet
+
+# Specific heavy folders
+hindi/data/raw/
+nepali/data/raw/
+hindi/data/*.jsonl
+nepali/data/*.jsonl
+data/
+clean_data/
+hindi_data/
+raw_data/
+
+# Model checkpoints & training outputs (Phase 2 & 3)
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+checkpoints/
+wandb/
+
+# LaTeX build residue
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

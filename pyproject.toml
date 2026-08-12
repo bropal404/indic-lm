@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lma"
+version = "0.1.0"
+description = "Monolingual Transformer LMs in Hindi and Nepali (LMA Project)"
+requires-python = ">=3.9"
+dependencies = [
+    "aiohttp",
+    "beautifulsoup4",
+    "datasketch",
+    "ebooklib",
+    "feedparser",
+    "lxml",
+    "pdfplumber",
+    "pillow",
+    "numpy",
+    "pypdf",
+    "pytest",
+    "pyyaml",
+    "readability-lxml",
+    "requests",
+    "trafilatura",
+    "tqdm>=4.70.0",
+    "matplotlib>=3.9.4",
+]
+
+[project.scripts]
+crawler = "crawler.cli:main"
+clean-hindi = "scripts.clean_hindi:main"
+report-stats = "scripts.generate_report_stats:main"
+tokenizer = "tokenizer.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.setuptools]
+packages = ["crawler", "crawler.extractors", "tokenizer", "scripts"]
