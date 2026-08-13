@@ -1,0 +1,244 @@
+{
+  "sources": [
+    {
+      "name": "social_science_baha",
+      "base_url": "https://soscbaha.org/publications/",
+      "enabled": true,
+      "kind": "books_reports_comics",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 3,
+        "timeout": 60
+      },
+      "language": {
+        "min_devanagari_ratio": 0.20,
+        "min_nepali_unicode_ratio": 0.15,
+        "min_characters": 150
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 3
+    },
+
+    {
+      "name": "martin_chautari",
+      "base_url": "https://martinchautari.org.np/mc-publications",
+      "enabled": true,
+      "kind": "books_journals_comics",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 3,
+        "timeout": 60
+      },
+      "language": {
+        "min_devanagari_ratio": 0.20,
+        "min_nepali_unicode_ratio": 0.15,
+        "min_characters": 150
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 4
+    },
+
+    {
+      "name": "feminist_narratives",
+      "base_url": "https://feministnarratives.com/",
+      "enabled": true,
+      "kind": "oral_history_interviews",
+      "crawl": {
+        "requests_per_second": 2.0,
+        "concurrency": 8,
+        "max_retries": 3,
+        "timeout": 45
+      },
+      "language": {
+        "min_devanagari_ratio": 0.15,
+        "min_nepali_unicode_ratio": 0.10,
+        "min_characters": 100
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html"],
+      "follow_links": true,
+      "max_depth": 4
+    },
+
+    {
+      "name": "digital_himalaya_shikshak",
+      "base_url": "https://www.digitalhimalaya.com/collections/journals/shikshak/",
+      "enabled": true,
+      "kind": "nepali_education_magazine",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 3,
+        "timeout": 90
+      },
+      "language": {
+        "min_devanagari_ratio": 0.15,
+        "min_nepali_unicode_ratio": 0.10,
+        "min_characters": 100
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 2
+    },
+
+    {
+      "name": "digital_himalaya_mtp",
+      "base_url": "https://www.digitalhimalaya.com/collections/journals/mtpp/",
+      "enabled": true,
+      "kind": "community_narratives",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 3,
+        "timeout": 90
+      },
+      "language": {
+        "min_devanagari_ratio": 0.15,
+        "min_nepali_unicode_ratio": 0.10,
+        "min_characters": 80
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 2
+    },
+
+    {
+      "name": "digital_himalaya_ancient_nepal",
+      "base_url": "https://www.digitalhimalaya.com/collections/journals/ancientnepal/",
+      "enabled": true,
+      "kind": "historical_nepal",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 3,
+        "timeout": 90
+      },
+      "language": {
+        "min_devanagari_ratio": 0.15,
+        "min_nepali_unicode_ratio": 0.10,
+        "min_characters": 80
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 2
+    },
+
+    {
+      "name": "digital_himalaya_regmi",
+      "base_url": "https://www.digitalhimalaya.com/collections/journals/regmi/",
+      "enabled": true,
+      "kind": "historical_research",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 3,
+        "timeout": 90
+      },
+      "language": {
+        "min_devanagari_ratio": 0.15,
+        "min_nepali_unicode_ratio": 0.10,
+        "min_characters": 80
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 2
+    },
+
+    {
+      "name": "archive_nepal",
+      "base_url": "https://www.archivenepal.org/",
+      "enabled": true,
+      "kind": "historical_books_manuscripts",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 3,
+        "timeout": 90
+      },
+      "language": {
+        "min_devanagari_ratio": 0.15,
+        "min_nepali_unicode_ratio": 0.10,
+        "min_characters": 80
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf", "image"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 4
+    },
+
+    {
+      "name": "icimod",
+      "base_url": "https://lib.icimod.org/",
+      "enabled": true,
+      "kind": "research_reports",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 3,
+        "timeout": 60
+      },
+      "language": {
+        "min_devanagari_ratio": 0.10,
+        "min_nepali_unicode_ratio": 0.05,
+        "min_characters": 100
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      },
+      "content_types": ["html", "pdf"],
+      "follow_links": true,
+      "extract_pdf": true,
+      "ocr_if_empty": true,
+      "max_depth": 3
+    }
+  ]
+}
