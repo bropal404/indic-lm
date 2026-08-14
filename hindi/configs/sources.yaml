@@ -1,0 +1,298 @@
+{
+  "sources": [
+    {
+      "name": "hindi_wikisource",
+      "base_url": "https://hi.wikisource.org/",
+      "enabled": true,
+      "kind": "public_domain_books",
+     
+
+    {
+      "name": "hindwi",
+      "base_url": "https://www.hindwi.org/",
+      "enabled": true,
+      "kind": "literature_books_magazines",
+      "crawl": {
+        "requests_per_second": 2.5,
+        "concurrency": 10,
+        "max_retries": 2,
+        "timeout": 30
+      },
+      "language": {
+        "min_devanagari_ratio": 0.58,
+        "min_hindi_unicode_ratio": 0.48,
+        "min_characters": 200
+      },
+      "discovery": {
+        "sitemap_urls": [
+          "https://www.hindwi.org/sitemap.xml"
+        ],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "rekhta_hindi_magazines",
+      "base_url": "https://www.rekhta.org/emagazines?lang=hi",
+      "enabled": true,
+      "kind": "magazines_literature",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 2,
+        "timeout": 40
+      },
+      "language": {
+        "min_devanagari_ratio": 0.50,
+        "min_hindi_unicode_ratio": 0.40,
+        "min_characters": 250
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "epustakalaya",
+      "base_url": "https://pustakalaya.org/",
+      "enabled": true,
+      "kind": "books_education_children",
+      "crawl": {
+        "requests_per_second": 2.0,
+        "concurrency": 8,
+        "max_retries": 2,
+        "timeout": 45
+      },
+      "language": {
+        "min_devanagari_ratio": 0.55,
+        "min_hindi_unicode_ratio": 0.45,
+        "min_characters": 250
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "chandamama_hindi",
+      "base_url": "https://www.chandamama.in/hindi/",
+      "enabled": true,
+      "kind": "comics_children_folklore",
+      "crawl": {
+        "requests_per_second": 2.0,
+        "concurrency": 8,
+        "max_retries": 2,
+        "timeout": 40
+      },
+      "language": {
+        "min_devanagari_ratio": 0.55,
+        "min_hindi_unicode_ratio": 0.45,
+        "min_characters": 200
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "chakmak",
+      "base_url": "https://eklavya.in/magazine-activity/chakmak-magazine/",
+      "enabled": true,
+      "kind": "children_magazine_science",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 2,
+        "timeout": 45
+      },
+      "language": {
+        "min_devanagari_ratio": 0.55,
+        "min_hindi_unicode_ratio": 0.45,
+        "min_characters": 250
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "pratilipi_hindi",
+      "base_url": "https://hindi.pratilipi.com/",
+      "enabled": true,
+      "kind": "user_generated_fiction",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 2,
+        "timeout": 30
+      },
+      "language": {
+        "min_devanagari_ratio": 0.50,
+        "min_hindi_unicode_ratio": 0.40,
+        "min_characters": 200
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "matrubharti_hindi",
+      "base_url": "https://hindi.matrubharti.com/",
+      "enabled": true,
+      "kind": "fiction_romance_magazines",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 2,
+        "timeout": 30
+      },
+      "language": {
+        "min_devanagari_ratio": 0.50,
+        "min_hindi_unicode_ratio": 0.40,
+        "min_characters": 200
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "storymirror_hindi",
+      "base_url": "https://storymirror.com/hindi",
+      "enabled": true,
+      "kind": "fiction_romance_drama",
+      "crawl": {
+        "requests_per_second": 1.5,
+        "concurrency": 6,
+        "max_retries": 2,
+        "timeout": 30
+      },
+      "language": {
+        "min_devanagari_ratio": 0.50,
+        "min_hindi_unicode_ratio": 0.40,
+        "min_characters": 200
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "femina_hindi",
+      "base_url": "https://www.femina.in/hindi/",
+      "enabled": true,
+      "kind": "fashion_women_lifestyle",
+      "crawl": {
+        "requests_per_second": 2.5,
+        "concurrency": 10,
+        "max_retries": 2,
+        "timeout": 30
+      },
+      "language": {
+        "min_devanagari_ratio": 0.55,
+        "min_hindi_unicode_ratio": 0.45,
+        "min_characters": 250
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "meri_saheli",
+      "base_url": "https://www.merisaheli.com/",
+      "enabled": true,
+      "kind": "women_fashion_relationships",
+      "crawl": {
+        "requests_per_second": 2.5,
+        "concurrency": 10,
+        "max_retries": 2,
+        "timeout": 30
+      },
+      "language": {
+        "min_devanagari_ratio": 0.55,
+        "min_hindi_unicode_ratio": 0.45,
+        "min_characters": 250
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "bollywood_dialogue_dataset",
+      "base_url": "https://www.cse.iitb.ac.in/~pjyothi/indiccorpora/nli.html",
+      "enabled": true,
+      "kind": "movie_dialogue",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 2,
+        "timeout": 40
+      },
+      "language": {
+        "min_devanagari_ratio": 0.25,
+        "min_hindi_unicode_ratio": 0.20,
+        "min_characters": 100
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "indicdialogue",
+      "base_url": "https://data.mendeley.com/datasets/wcb4bxbyxx",
+      "enabled": true,
+      "kind": "subtitles_dialogue_dataset",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 2,
+        "timeout": 60
+      },
+      "language": {
+        "min_devanagari_ratio": 0.25,
+        "min_hindi_unicode_ratio": 0.20,
+        "min_characters": 80
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    },
+
+    {
+      "name": "iitb_hindi_corpus",
+      "base_url": "https://www.cfilt.iitb.ac.in/iitb_parallel/",
+      "enabled": true,
+      "kind": "language_corpus",
+      "crawl": {
+        "requests_per_second": 1.0,
+        "concurrency": 4,
+        "max_retries": 2,
+        "timeout": 60
+      },
+      "language": {
+        "min_devanagari_ratio": 0.45,
+        "min_hindi_unicode_ratio": 0.35,
+        "min_characters": 100
+      },
+      "discovery": {
+        "sitemap_urls": [],
+        "rss_urls": []
+      }
+    }
+  ]
+}
