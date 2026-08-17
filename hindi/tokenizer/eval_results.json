@@ -1,0 +1,173 @@
+{
+  "language": "Hindi",
+  "language_code": "hi",
+  "test_documents_evaluated": 4428,
+  "models_evaluated": [
+    {
+      "name": "BPE-5K",
+      "vocab_size": 6832,
+      "total_tokens": 5461761,
+      "fertility": 1.55,
+      "bytes_per_token": 8.2,
+      "chars_per_token": 3.27,
+      "continuation_rate_pct": 31.03,
+      "unk_rate_pct": 0.0,
+      "tokens_per_sec": 1193593,
+      "throughput_mb_sec": 9.33,
+      "elapsed_sec": 4.58,
+      "top_tokens": [
+        [
+          "के",
+          107849
+        ],
+        [
+          ",",
+          104972
+        ],
+        [
+          ".",
+          99124
+        ],
+        [
+          "में",
+          84867
+        ],
+        [
+          "की",
+          77714
+        ],
+        [
+          "से",
+          67186
+        ],
+        [
+          "है",
+          62041
+        ],
+        [
+          "और",
+          60252
+        ],
+        [
+          "का",
+          56806
+        ],
+        [
+          "को",
+          56508
+        ]
+      ]
+    },
+    {
+      "name": "BPE-10K",
+      "vocab_size": 11263,
+      "total_tokens": 4924912,
+      "fertility": 1.397,
+      "bytes_per_token": 9.09,
+      "chars_per_token": 3.63,
+      "continuation_rate_pct": 23.76,
+      "unk_rate_pct": 0.0,
+      "tokens_per_sec": 1060313,
+      "throughput_mb_sec": 9.2,
+      "elapsed_sec": 4.64,
+      "top_tokens": [
+        [
+          "के",
+          105842
+        ],
+        [
+          ",",
+          104972
+        ],
+        [
+          ".",
+          99124
+        ],
+        [
+          "में",
+          84708
+        ],
+        [
+          "की",
+          75945
+        ],
+        [
+          "से",
+          64056
+        ],
+        [
+          "है",
+          61772
+        ],
+        [
+          "और",
+          60100
+        ],
+        [
+          "को",
+          53983
+        ],
+        [
+          "-",
+          52482
+        ]
+      ]
+    },
+    {
+      "name": "BPE-20K",
+      "vocab_size": 20195,
+      "total_tokens": 4546513,
+      "fertility": 1.29,
+      "bytes_per_token": 9.85,
+      "chars_per_token": 3.93,
+      "continuation_rate_pct": 18.14,
+      "unk_rate_pct": 0.0,
+      "tokens_per_sec": 979965,
+      "throughput_mb_sec": 9.21,
+      "elapsed_sec": 4.64,
+      "top_tokens": [
+        [
+          ",",
+          104972
+        ],
+        [
+          "के",
+          104216
+        ],
+        [
+          ".",
+          99124
+        ],
+        [
+          "में",
+          84434
+        ],
+        [
+          "की",
+          74162
+        ],
+        [
+          "से",
+          62647
+        ],
+        [
+          "है",
+          61427
+        ],
+        [
+          "और",
+          60051
+        ],
+        [
+          "-",
+          52482
+        ],
+        [
+          "को",
+          52412
+        ]
+      ]
+    }
+  ],
+  "tokenized_samples_file": "tokenized_sample_sentences.json"
+}

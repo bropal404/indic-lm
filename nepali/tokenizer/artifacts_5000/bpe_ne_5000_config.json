@@ -1,0 +1,10 @@
+{
+  "type": "custom_bpe",
+  "num_merges": 5000,
+  "learned_merges": 5000,
+  "min_pair_frequency": 2,
+  "vocab_size": 4777,
+  "model_file": "bpe_ne_5000.pkl",
+  "vocab_file": "bpe_ne_5000_vocab.json",
+  "merges_file": "bpe_ne_5000_merges.txt"
+}
