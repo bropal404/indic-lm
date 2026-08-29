@@ -1,0 +1,9 @@
+Training started at Fri Aug 28 17:26:22 2026
+Config: {'model': {'vocab_size': 30980, 'd_model': 384, 'n_layers': 6, 'n_heads': 6, 'd_ff': 1536, 'context_length': 256, 'dropout': 0.1, 'weight_tying': True}, 'training': {'batch_size': 8, 'learning_rate': '3e-4', 'weight_decay': 0.1, 'warmup_steps': 5000, 'max_steps': 50000, 'gradient_accumulation_steps': 4, 'gradient_clip': 1.0, 'mixed_precision': False}, 'data': {'train_file': 'hindi/data/train.jsonl', 'val_file': 'hindi/data/val.jsonl', 'test_file': 'hindi/data/test.jsonl', 'tokenizer_path': 'hindi/tokenizer/artifacts/bpe_hi_32000.pkl', 'text_field': 'text', 'num_workers': 0}, 'checkpoint': {'save_dir': 'phase2/checkpoints/model_h', 'save_every': 1000, 'keep_last_n': 3}, 'eval': {'eval_every': 1000, 'eval_steps': 20, 'generation_temperatures': [0.5, 1.0, 1.5], 'max_new_tokens': 50}, 'logging': {'log_dir': 'phase2/logs', 'log_every': 100, 'wandb': False}, 'seed': 42}
+
+Total parameters: 22,632,960
+Trainable parameters: 22,632,960
+Loaded checkpoint from step 7000
+Starting training for 50000 steps
+Step 7000 | Loss: 6.2057 | LR: 0.000105 | Tokens: 14,342,144
+Step 7000 | Val Loss: 6.0993 | Val PPL: 445.54
