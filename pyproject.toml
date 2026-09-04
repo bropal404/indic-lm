@@ -25,6 +25,10 @@ dependencies = [
     "trafilatura",
     "tqdm>=4.70.0",
     "matplotlib>=3.9.4",
+    "huggingface-hub>=1.8.0",
+    "datasets>=4.5.0",
+    "pyarrow>=21.0.0",
+    "tensorboard>=2.21.0",
 ]
 
 [project.scripts]
@@ -33,9 +37,15 @@ clean-hindi = "scripts.clean_hindi:main"
 report-stats = "scripts.generate_report_stats:main"
 tokenizer = "tokenizer.cli:main"
 
+# Hindi LM training / evaluation / generation CLI scripts
+lma-train-hindi = "hindi.train.training:main"
+lma-eval-hindi = "hindi.eval.evaluation:main"
+lma-generate = "hindi.eval.evaluation:generate_samples"
+lma-tokenize = "tokenizer.cli:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
 
 [tool.setuptools]
-packages = ["crawler", "crawler.extractors", "tokenizer", "scripts"]
+packages = ["crawler", "crawler.extractors", "tokenizer", "scripts", "hindi", "nepali"]

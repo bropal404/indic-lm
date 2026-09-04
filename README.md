@@ -74,7 +74,7 @@ Combines self-crawled and curated public datasets into train, validation, and te
 ```bash
 python3 scripts/split_and_stats.py
 
-# Or run language-specific preproc essing pipelines
+# Or run language-specific preprocessing pipelines
 python3 hindi/data/preprocess.py
 python3 nepali/data/preprocess.py
 ```
@@ -129,21 +129,24 @@ uv run tokenizer evaluate --lang ne --samples 1000
 
 ---
 
-### 7. Zip and Unzip Datasets
+### 7. Train / Evaluate / Generate (Hindi CLI via uv)
 
-Scripts to bundle all dataset JSONL files into a single archive, or unpack an existing archive into place.
+The repo now ships with uv console scripts for common Phase 2 tasks:
 
 ```bash
-# Package all corpus files (train, val, test, scraped, public) into an archive
-./scripts/zip_corpora.sh corpora_dataset_bundle.tar.gz
+# Train Hindi model from checkpoint or resume
+uv run lma-train-hindi [--config path/to/model_h.yaml] [--checkpoint path/to/checkpoint.pt]
 
-# Unpack archive into hindi/data/ and nepali/data/
-./scripts/unzip_corpora.sh corpora_dataset_bundle.tar.gz
+# Evaluate Hindi model and generate samples
+uv run lma-eval-hindi [--config path/to/model_h.yaml] [--checkpoint path/to/best_model.pt] [--prompts "नमस्ते" "hello"]
+
+# Generate text samples from a trained model
+uv run lma-generate [--config path/to/model_h.yaml] [--checkpoint path/to/final_model.pt] [--prompts "नमस्ते"]
 ```
 
 ---
 
-### 8. Generate  Stats and Figures
+### 8. Generate Stats and Figures
 
 ```bash
 python3 scripts/generate_report_stats.py
