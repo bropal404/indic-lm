@@ -46,7 +46,7 @@ def process_corpus(input_path, output_dir, lang_name, lang_code):
     total_deva_chars = 0
     
     with open(input_path, 'r', encoding='utf-8') as f:
-        for line in tqdm(f, desc=f"Reading {lang_name}"):
+        for line in tqdm(f, desc=f"Reading {lang_name}", miniters=100):
             if not line.strip():
                 continue
             try:

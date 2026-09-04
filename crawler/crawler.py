@@ -75,7 +75,7 @@ class NepaliCrawler:
         rss_urls = list(discovery.get("rss_urls", []))
         discovered: List[str] = []
 
-        for sitemap_url in tqdm(sitemap_queue[:50], desc=f"[{source['name']}] Sitemaps", unit="sitemap", leave=False):
+        for sitemap_url in tqdm(sitemap_queue[:50], desc=f"[{source['name']}] Sitemaps", unit="sitemap", leave=False, miniters=100):
             try:
                 resp = requests.get(sitemap_url, headers={"User-Agent": self.user_agent}, timeout=30)
                 if not resp.ok:
@@ -153,6 +153,7 @@ class NepaliCrawler:
             unit="url",
             dynamic_ncols=True,
             postfix={"accepted": 0, "rejected": 0, "dupes": 0},
+            miniters=100,
         )
 
         async def one(url: str) -> None:

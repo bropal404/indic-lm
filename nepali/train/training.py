@@ -1,4 +1,13 @@
+#!/usr/bin/env python3
+"""Nepali Transformer Language Model Trainer.
+
+Entry point: python3 nepali/train/training.py or python3 -m nepali.train
+
+Phase 2 training for Model L (Nepali) - CPU optimized, no mixed precision.
+"""
+
 import os
+import sys
 import yaml
 import torch
 import torch.nn as nn
@@ -7,6 +16,7 @@ from torch.optim.lr_scheduler import LambdaLR
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 import time
+import math
 from pathlib import Path
 from typing import Dict, Any, Optional
 import math
@@ -17,10 +27,10 @@ def get_cosine_schedule_with_warmup(
     num_warmup_steps: int,
     num_training_steps: int,
     num_cycles: float = 0.5,
-    last_epoch: int = -1
+    last_epoch: int = -1,
 ):
     """Create a schedule with warmup and cosine decay."""
-    
+
     def lr_lambda(current_step):
         if current_step < num_warmup_steps:
             return float(current_step) / float(max(1, num_warmup_steps))
@@ -166,7 +176,7 @@ class Trainer:
         total_tokens = 0
         batches = 0
         
-        eval_steps = num_batches or self.config['eval']['eval_steps']
+        eval_steps = num_batches or self.config['eval']['eval_every']
         
         for batch in self.val_loader:
             if batches >= eval_steps:
@@ -203,7 +213,7 @@ class Trainer:
         self.log_file.write(f"Starting training for {max_steps} steps\n")
         self.log_file.flush()
         
-        pbar = tqdm(total=max_steps, initial=self.step, desc="Training")
+        pbar = tqdm(total=max_steps, initial=self.step, desc="Training", miniters=100)
         
         while self.step < max_steps:
             self.epoch += 1
@@ -290,31 +300,20 @@ def load_config(config_path: str) -> Dict[str, Any]:
 
 def create_model_from_config(config: Dict[str, Any]):
     """Create model from configuration."""
-    from model import TransformerLM
+    from nepali.train.model import create_model_from_config as _create_model
     
-    model_config = config['model']
-    model = TransformerLM(
-        vocab_size=model_config['vocab_size'],
-        d_model=model_config['d_model'],
-        n_layers=model_config['n_layers'],
-        n_heads=model_config['n_heads'],
-        d_ff=model_config['d_ff'],
-        context_length=model_config['context_length'],
-        dropout=model_config['dropout'],
-        weight_tying=model_config.get('weight_tying', True)
-    )
+    model = _create_model(config)
     return model
 
 
 if __name__ == "__main__":
     import sys
-    sys.path.insert(0, 'phase2/src')
     
     from tokenizer_utils import load_tokenizer
     from dataset import create_dataloaders
     from model import TransformerLM
     
-    config = load_config('phase2/configs/model_h.yaml')
+    config = load_config('nepali/configs/model_l.yaml')
     
     tokenizer = load_tokenizer(config['data']['tokenizer_path'])
     

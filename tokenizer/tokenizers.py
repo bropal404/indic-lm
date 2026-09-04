@@ -15,54 +15,6 @@ random.seed(69)
 BPE_MERGES = 10000 # Default
 
 
-def clean_text(text, language="non-english"):
-    text = unicodedata.normalize('NFKC', text)
-    text = "".join(ch for ch in text if unicodedata.category(ch)[0] != "C" or ch in ["\n", "\t"])
-    text = re.sub(r'\s+', ' ', text)
-    if language.lower() == "english":
-        text = text.encode("ascii", "ignore").decode("ascii")
-    return text.strip()
-
-
-def load_data(file_path, text_field="text", limit=None):
-    path_name = os.path.basename(file_path).lower()
-    language = "english" if ("english" in path_name or path_name.startswith("cc100_en") or path_name.endswith("_en.jsonl")) else "non-english"
-    data = []
-    with open(file_path, 'r', encoding='utf-8') as f:
-        if file_path.endswith('.jsonl'):
-            for line in f:
-                if not line.strip():
-                    continue
-                try:
-                    obj = json.loads(line)
-                    val = obj.get(text_field) or obj.get('text')
-                    if val:
-                        cleaned = clean_text(str(val), language)
-                        if cleaned:
-                            data.append(cleaned)
-                            if limit and len(data) >= limit:
-                                break
-                except json.JSONDecodeError:
-                    continue
-        else:
-            text = f.read()
-            cleaned = clean_text(text, language)
-            if cleaned:
-                data.append(cleaned)
-    return data
-
-
-def split_data(data):
-    data = list(data)
-    random.shuffle(data)
-    n = len(data)
-    train_end = int(n * 0.5)
-    val_end = int(n * 0.75)
-    return data[:train_end], data[train_end:val_end], data[val_end:]
-
-
-# --- Tokenizers ---
-
 class Tokenizer:
     def train(self, data):
         pass
@@ -132,7 +84,7 @@ class customBPE(Tokenizer):
         return tuple(new_seq)
 
     def _build_vocab(self, sequences):
-        tokens = {"<unk>": 0}
+        tokens = {"특수": 0}
         for sequence in sequences:
             for token in sequence:
                 if token == "</w>":
@@ -335,3 +287,45 @@ class customBPE(Tokenizer):
             "merges": merges_path,
             "config": config_path,
         }
+
+
+class BPETokenizer(customBPE):
+    """BPE tokenizer with save_pretrained and HF Hub compatibility."""
+    
+    def save_pretrained(self, save_directory):
+        """Save tokenizer model and vocabulary to directory."""
+        output_dir = Path(save_directory)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save model using existing method
+        self.save(output_dir / f"bpe_{self.num_merges}.pkl")
+        
+        # Save vocab as JSON
+        vocab_path = output_dir / f"bpe_{self.num_merges}_vocab.json"
+        with open(vocab_path, "w", encoding="utf-8") as f:
+            json.dump(self.vocab, f, ensure_ascii=False, indent=2)
+        
+        # Save merges as txt
+        merges_path = output_dir / f"bpe_{self.num_merges}_merges.txt"
+        with open(merges_path, "w", encoding="utf-8") as f:
+            for left, right in self.merges:
+                f.write(f"{left} {right}\n")
+    
+    @classmethod
+    def from_pretrained(cls, load_directory, name="bpe"):
+        """Load tokenizer from directory."""
+        load_dir = Path(load_directory)
+        
+        # Try to load the pkl file
+        pkl_path = None
+        for f in load_dir.iterdir():
+            if f.name.endswith('.pkl') and f.name.startswith(f"{name}_"):
+                pkl_path = f
+                break
+        
+        if pkl_path is None:
+            raise FileNotFoundError(f"No tokenizer pkl found in {load_directory}")
+        
+        tokenizer = cls()
+        tokenizer.load(str(pkl_path))
+        return tokenizer

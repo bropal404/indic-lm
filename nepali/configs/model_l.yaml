@@ -2,7 +2,7 @@
 model:
   vocab_size: 27998
   d_model: 384
-  n_layers: 6
+  n_layers: 8
   n_heads: 6
   d_ff: 1536
   context_length: 256
@@ -28,7 +28,7 @@ data:
   num_workers: 0
 
 checkpoint:
-  save_dir: "phase2/checkpoints/model_l"
+  save_dir: "nepali/checkpoints"
   save_every: 1000
   keep_last_n: 3
 

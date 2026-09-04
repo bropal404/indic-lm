@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Tokenize Hindi dataset and push directly to Hugging Face Hub (bropal404/lma-project).
+Tokenize and push dataset to Hugging Face Hub using 20k BPE tokenizer.
+
+Supports both Hindi (hi) and Nepali (ne) languages via --lang flag or
+DEFAULT_LANG top-level variable. Uses HF_TOKEN_GOPAL for authentication.
 
 Splits processed:
   - train.jsonl -> train
@@ -9,6 +12,9 @@ Splits processed:
 
 Each sample is chunked into context_length token sequences:
   - input_ids: list of int32 token IDs of length context_length
+
+Uses fixed 20k merges uniformly for both Hindi and Nepali - this size
+is sure to exist for both languages and works best for the transformer model.
 """
 
 import argparse
@@ -26,7 +32,12 @@ from tqdm import tqdm
 
 # Add repo root to path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from tokenizer.tokenizers import RegexTokenizer
+
+# Top-level variable to switch between Hindi and Nepali
+DEFAULT_LANG = "ne"  # Change to "hi" for Hindi
+
+# Fixed 20k merges used uniformly for both languages
+MERGES = 20000
 
 
 class FastBPETokenizer:
@@ -41,8 +52,9 @@ class FastBPETokenizer:
 
         self.vocab: Dict[str, int] = data["vocab"]
         self.merges: Dict[tuple, str] = data["merges"]
-        self.unk_id: int = self.vocab.get("<unk>", 0)
+        self.unk_id: int = self.vocab.get("특수", 0) if "특수" in self.vocab else self.vocab.get(" __unknown__", 0) if "__unknown__" in self.vocab else 0
         self.merge_ranks = {pair: idx for idx, pair in enumerate(self.merges.keys())}
+        from tokenizer.tokenizers import RegexTokenizer
         self.pre_tokenizer = RegexTokenizer()
         self._token_cache = {}
 
@@ -113,7 +125,7 @@ def process_jsonl_to_arrow_chunks(
     total_written = 0
 
     with open(jsonl_path, "r", encoding="utf-8") as f:
-        for idx, line in enumerate(tqdm(f, desc=f"Processing {Path(jsonl_path).name}")):
+        for idx, line in enumerate(tqdm(f, desc=f"Processing {Path(jsonl_path).name}", miniters=100)):
             if max_samples and idx >= max_samples:
                 break
             if not line.strip():
@@ -162,18 +174,41 @@ def process_jsonl_to_arrow_chunks(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Tokenize and upload Hindi dataset to Hugging Face Hub")
-    parser.add_argument("--repo-id", type=str, default="bropal404/lma-project", help="HF Repo ID")
-    parser.add_argument("--tokenizer-path", type=str, default="hindi/tokenizer/artifacts/bpe_hi_32000.pkl", help="Path to tokenizer pkl")
-    parser.add_argument("--data-dir", type=str, default="hindi/data", help="Path to hindi/data dir containing train/val/test.jsonl")
+    parser = argparse.ArgumentParser(description="Tokenize and upload dataset to Hugging Face Hub")
+    parser.add_argument("--lang", type=str, choices=["hi", "ne"], default=None, help="Language: hi for Hindi, ne for Nepali (default: DEFAULT_LANG)")
+    parser.add_argument("--repo-id", type=str, default=None, help="HF Repo ID")
+    parser.add_argument("--tokenizer-path", type=str, default=None, help="Path to tokenizer pkl (20k merges)")
+    parser.add_argument("--data-dir", type=str, default=None, help="Path to data dir containing train/val/test.jsonl")
     parser.add_argument("--output-dir", type=str, default="data/tokenized_hf", help="Temporary dir for parquet files")
     parser.add_argument("--context-length", type=int, default=256, help="Context length")
-    parser.add_argument("--hf-token", type=str, default=os.getenv("HF_TOKEN"), help="Hugging Face API Token")
+    parser.add_argument("--hf-token", type=str, default=os.getenv("HF_TOKEN_GOPAL", ""), help="Hugging Face API Token (uses HF_TOKEN_GOPAL env var by default)")
     parser.add_argument("--max-train-samples", type=int, default=None, help="Debug option: limit train lines")
     parser.add_argument("--upload-only", action="store_true", help="Skip tokenization and only upload existing parquet files")
     args = parser.parse_args()
 
-    token = args.hf_token or os.getenv("HF_TOKEN")
+    # Use --lang if provided, otherwise fall back to DEFAULT_LANG
+    if args.lang is not None:
+        lang = args.lang
+    else:
+        lang = DEFAULT_LANG  # "ne" by default
+
+    # Set paths based on language
+    if lang == "ne":
+        if args.repo_id is None:
+            args.repo_id = "bropal/lma-project-nepali"
+        if args.tokenizer_path is None:
+            args.tokenizer_path = "nepali/tokenizer/artifacts_20000/bpe_ne_20000.pkl"
+        if args.data_dir is None:
+            args.data_dir = "nepali/data"
+    else:  # "hi"
+        if args.repo_id is None:
+            args.repo_id = "bropal/lma-project"
+        if args.tokenizer_path is None:
+            args.tokenizer_path = "hindi/tokenizer/artifacts_20000/bpe_hi_20000.pkl"
+        if args.data_dir is None:
+            args.data_dir = "hindi/data"
+
+    token = os.getenv("HF_TOKEN_GOPAL")
     if not token:
         print("[WARNING] HF_TOKEN is not set. You can set HF_TOKEN environment variable or pass --hf-token.")
 
@@ -187,7 +222,7 @@ def main():
     }
 
     if not args.upload_only:
-        print(f"Loading tokenizer from: {args.tokenizer_path}")
+        print(f"Loading 20k tokenizer from: {args.tokenizer_path}")
         tokenizer = FastBPETokenizer(args.tokenizer_path)
 
         for split_name, jsonl_file in splits.items():

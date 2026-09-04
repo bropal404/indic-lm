@@ -274,7 +274,7 @@ def run_pipeline(
 
         for input_file in input_files:
             print(f"\nProcessing {input_file} ...")
-            for obj in tqdm(iter_jsonl(input_file), desc=Path(input_file).name):
+            for obj in tqdm(iter_jsonl(input_file), desc=Path(input_file).name, miniters=100):
                 if obj.get("_parse_error"):
                     counts["parse_error"] += 1
                     reject(writers["parse"], obj, "json_parse_error")

@@ -236,7 +236,7 @@ class Trainer:
         self.log_file.write(f"Starting training for {max_steps} steps (resume step={self.step})\n")
         self.log_file.flush()
 
-        pbar = tqdm(total=max_steps, initial=self.step, desc="Training")
+        pbar = tqdm(total=max_steps, initial=self.step, desc="Training", miniters=100)
 
         while self.step < max_steps:
             self.epoch += 1

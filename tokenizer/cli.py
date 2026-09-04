@@ -156,7 +156,7 @@ def run_evaluate(args):
         multi_subword_words = 0
         total_word_count = 0
 
-        for doc in tqdm(eval_set):
+        for doc in tqdm(eval_set, miniters=100):
             tokens = tok.tokenize(doc)
             total_tokens += len(tokens)
 

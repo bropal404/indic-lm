@@ -31,7 +31,7 @@ checkpoint:
   save_dir: "hindi/checkpoints"
   save_every: 1000
   keep_last_n: 3
-  hf_repo_id: "bropal404/lma-project-checkpoints"
+  hf_repo_id: "bropal/lma-project-checkpoints"
 
 eval:
   eval_every: 1000

@@ -44,7 +44,7 @@ def evaluate_tokenizer(tok, test_docs, name, lang_name):
     unk_count = 0
     token_freq = Counter()
     
-    for doc in tqdm(test_docs, desc=f"    Tokenizing with {name}", leave=False):
+    for doc in tqdm(test_docs, desc=f"    Tokenizing with {name}", leave=False, miniters=100):
         chars = len(doc)
         bytes_len = len(doc.encode('utf-8'))
         words = doc.split()

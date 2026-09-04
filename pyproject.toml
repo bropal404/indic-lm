@@ -43,6 +43,10 @@ lma-eval-hindi = "hindi.eval.evaluation:main"
 lma-generate = "hindi.eval.evaluation:generate_samples"
 lma-tokenize = "tokenizer.cli:main"
 
+# Nepali LM training / evaluation / generation CLI scripts
+lma-train-nepali = "nepali.train.training:main"
+lma-eval-nepali = "nepali.eval.evaluation:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]

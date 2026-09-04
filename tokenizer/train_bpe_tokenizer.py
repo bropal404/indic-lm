@@ -20,7 +20,7 @@ def read_documents(input_paths, language, text_field):
         print(f"Reading {path}...")
         if path.suffix == ".jsonl":
             with open(path, "r", encoding="utf-8") as f:
-                for line in tqdm(f):
+                for line in tqdm(f, miniters=100):
                     try:
                         item = json.loads(line)
                     except json.JSONDecodeError:
