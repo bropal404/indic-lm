@@ -186,18 +186,15 @@ def load_tokenizer_from_hf(repo_id, token):
     api = HfApi(token=token)
     tokenizer_path = None
 
-    # List files in repo to find the 20k pkl
     try:
         files = api.list_repo_files(repo_id=repo_id, token=token)
         pkl_files = [f for f in files if f.endswith('.pkl')]
         if pkl_files:
-            # Prefer the 20k version (uniform for both languages)
             for pf in pkl_files:
                 if "20000" in pf or "artifacts_20000" in pf:
                     tokenizer_path = pf
                     break
             if tokenizer_path is None:
-                # Fall back to any pkl
                 tokenizer_path = pkl_files[0]
     except Exception:
         tokenizer_path = None
@@ -210,7 +207,7 @@ def load_tokenizer_from_hf(repo_id, token):
 
     print(f"Loading 20k tokenizer from {repo_id}:{tokenizer_path}...")
     tokenizer = BPETokenizer()
-    tokenizer.load(tokenizer_path)  # load from HF path
+    tokenizer.load(tokenizer_path)
     return tokenizer
 
 
@@ -228,7 +225,7 @@ def load_tokenized_data_from_hf(data_repo_id, token, split="train"):
             token_ids = dataset["input_ids"][:min(10000, len(dataset))]
         return token_ids
     except Exception:
-        print(f"Could not load {split} data from cache")
+        print(f"Could not load from cache for {split}")
         return None
 
 
@@ -313,9 +310,9 @@ def main():
     else:
         # Fallback: create simple dataset
         print("Using fallback dataset creation...")
-        train_token_ids = torch.randint(0, vocab_size, (5000, SEQ_LEN))
-        val_token_ids = torch.randint(0, vocab_size, (1000, SEQ_LEN))
-        test_token_ids = torch.randint(0, vocab_size, (1000, SEQ_LEN))
+        train_token_ids = torch.randint(0, vocab_size, (5000, SEQ_LEN)).tolist()
+        val_token_ids = torch.randint(0, vocab_size, (1000, SEQ_LEN)).tolist()
+        test_token_ids = torch.randint(0, vocab_size, (1000, SEQ_LEN)).tolist()
         train_dataset_obj = TextDataset(train_token_ids, SEQ_LEN)
         val_dataset_obj = TextDataset(val_token_ids, SEQ_LEN)
         test_dataset_obj = TextDataset(test_token_ids, SEQ_LEN)
