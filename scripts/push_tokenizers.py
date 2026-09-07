@@ -117,7 +117,7 @@ def main():
 
     try:
         push_tokenizer_to_hf(tokenizer_dir, repo_id, hf_token)
-        print(f"✓ Successfully pushed bpe_{lang}_{merges} tokenizer!")
+        print(f"[OK] Successfully pushed bpe_{lang}_{merges} tokenizer!")
     except Exception as e:
         print(f"[ERROR] Failed to push tokenizer: {e}")
         return 1
