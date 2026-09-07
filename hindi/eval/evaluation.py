@@ -98,6 +98,8 @@ def compute_bits_per_byte(model, dataloader, tokenizer, device, max_batches=None
 
 def decode_ids(ids: List[int], tokenizer) -> str:
     """Decode token IDs back to text."""
+    if hasattr(tokenizer, 'decode'):
+        return tokenizer.decode(ids)
     inv_vocab = {v: k for k, v in tokenizer.vocab.items()}
     tokens = [inv_vocab.get(id, '') for id in ids]
     # Join with space for word-level tokens
@@ -106,6 +108,8 @@ def decode_ids(ids: List[int], tokenizer) -> str:
 
 def encode_text(text: str, tokenizer) -> List[int]:
     """Encode text to token IDs."""
+    if hasattr(tokenizer, 'encode'):
+        return tokenizer.encode(text)
     tokens = tokenizer.tokenize(text)
     return [tokenizer.vocab.get(token, 0) for token in tokens]
 
@@ -291,16 +295,15 @@ def main():
         config = yaml.safe_load(f)
 
     # Load model
-    from model import TransformerLM
-    model = TransformerLM(
+    from model import GPTLanguageModel
+    model = GPTLanguageModel(
         vocab_size=config['model']['vocab_size'],
         d_model=config['model']['d_model'],
-        n_layers=config['model']['n_layers'],
         n_heads=config['model']['n_heads'],
+        n_layers=config['model']['n_layers'],
         d_ff=config['model']['d_ff'],
-        context_length=config['model']['context_length'],
+        context_len=config['model']['context_length'],
         dropout=config['model']['dropout'],
-        weight_tying=config['model'].get('weight_tying', True)
     )
     model.to(args.device)
     model.eval()

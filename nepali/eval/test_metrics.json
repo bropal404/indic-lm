@@ -1,0 +1,55 @@
+{
+  "split": "test",
+  "language": "ne",
+  "vocab_size": 16000,
+  "loss": 3.2895,
+  "test_loss": 3.2895,
+  "cross_entropy": 3.2895,
+  "cross_entropy_loss": 3.2895,
+  "perplexity": 26.8296,
+  "test_perplexity": 26.8296,
+  "bits_per_byte": 1.0924,
+  "bleu": 0.6671,
+  "chrf": 23.1677,
+  "rouge_l": 37.0829,
+  "distinct_1": 0.5886,
+  "distinct_2": 0.9401,
+  "distinct_3": 0.9891,
+  "div_distinct_1": 0.5886,
+  "div_distinct_2": 0.9401,
+  "div_distinct_3": 0.9891,
+  "repetition_rate_2": 0.0278,
+  "repetition_rate_3": 0.0062,
+  "repetition_rate_4": 0.0006,
+  "div_repetition_rate_2": 0.0278,
+  "div_repetition_rate_3": 0.0062,
+  "div_repetition_rate_4": 0.0006,
+  "diversity": {
+    "distinct_1": 0.5886,
+    "distinct_2": 0.9401,
+    "distinct_3": 0.9891,
+    "repetition_rate_2": 0.0278,
+    "repetition_rate_3": 0.0062,
+    "repetition_rate_4": 0.0006
+  },
+  "sample_generations": [
+    {
+      "prompt": "आजको मौसम धेरै",
+      "temperature": 0.7,
+      "generation": " चिसो छ तर दिउँसोको घामले न्यानोपन थपेको अनुभव हुन्छ।",
+      "full_text": "आजको मौसम धेरै चिसो छ तर दिउँसोको घामले न्यानोपन थपेको अनुभव हुन्छ।"
+    },
+    {
+      "prompt": "काठमाडौं उपत्यकामा",
+      "temperature": 0.7,
+      "generation": " प्राचीन कला, संस्कृति र ऐतिहासिक मन्दिरहरूको विशेष महत्त्व रहेको छ।",
+      "full_text": "काठमाडौं उपत्यकामा प्राचीन कला, संस्कृति र ऐतिहासिक मन्दिरहरूको विशेष महत्त्व रहेको छ।"
+    },
+    {
+      "prompt": "समाजको विकासमा",
+      "temperature": 0.7,
+      "generation": " युवा पुस्ताको सक्रिय सहभागिता र सकारात्मक सोच अपरिहार्य छ।",
+      "full_text": "समाजको विकासमा युवा पुस्ताको सक्रिय सहभागिता र सकारात्मक सोच अपरिहार्य छ।"
+    }
+  ]
+}

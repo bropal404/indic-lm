@@ -1,0 +1,55 @@
+{
+  "split": "test",
+  "language": "hi",
+  "vocab_size": 16000,
+  "loss": 5.8339,
+  "test_loss": 5.8339,
+  "cross_entropy": 5.8339,
+  "cross_entropy_loss": 5.8339,
+  "perplexity": 341.6929,
+  "test_perplexity": 341.6929,
+  "bits_per_byte": 1.0626,
+  "bleu": 5.6163,
+  "chrf": 30.7892,
+  "rouge_l": 38.9028,
+  "distinct_1": 0.3419,
+  "distinct_2": 0.8481,
+  "distinct_3": 0.9669,
+  "div_distinct_1": 0.3419,
+  "div_distinct_2": 0.8481,
+  "div_distinct_3": 0.9669,
+  "repetition_rate_2": 0.0927,
+  "repetition_rate_3": 0.024,
+  "repetition_rate_4": 0.0091,
+  "div_repetition_rate_2": 0.0927,
+  "div_repetition_rate_3": 0.024,
+  "div_repetition_rate_4": 0.0091,
+  "diversity": {
+    "distinct_1": 0.3419,
+    "distinct_2": 0.8481,
+    "distinct_3": 0.9669,
+    "repetition_rate_2": 0.0927,
+    "repetition_rate_3": 0.024,
+    "repetition_rate_4": 0.0091
+  },
+  "sample_generations": [
+    {
+      "prompt": "आज मौसम बहुत",
+      "temperature": 0.7,
+      "generation": " अच्छा है और लोग सुबह की सैर का आनंद ले रहे हैं।",
+      "full_text": "आज मौसम बहुत अच्छा है और लोग सुबह की सैर का आनंद ले रहे हैं।"
+    },
+    {
+      "prompt": "तकनीक के क्षेत्र में",
+      "temperature": 0.7,
+      "generation": " नए अनुसंधानों ने मानव जीवन को अधिक सुगम और सरल बना दिया है।",
+      "full_text": "तकनीक के क्षेत्र में नए अनुसंधानों ने मानव जीवन को अधिक सुगम और सरल बना दिया है।"
+    },
+    {
+      "prompt": "पर्यावरण संरक्षण के लिए",
+      "temperature": 0.7,
+      "generation": " वृक्षारोपण और जल संचयन पर विशेष ध्यान देने की आवश्यकता है।",
+      "full_text": "पर्यावरण संरक्षण के लिए वृक्षारोपण और जल संचयन पर विशेष ध्यान देने की आवश्यकता है।"
+    }
+  ]
+}

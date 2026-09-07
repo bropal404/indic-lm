@@ -28,6 +28,9 @@ import random
 import sys
 from pathlib import Path
 
+# Add repo root to path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import torch
 import torch.nn as nn
 import numpy as np
@@ -48,10 +51,7 @@ from nepali.eval.evaluation import (
     encode_text,
     decode_ids,
 )
-from nepali.train.training import TransformerLM
-
-# Add repo root to path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from model import GPTLanguageModel
 
 # Nepali tokenizer path (16k merges)
 NEPALESE_TOKENIZER_PATH = "nepali/tokenizer/nepali_tokenizer_16000.json"
@@ -70,74 +70,180 @@ def load_nepali_tokenizer(tokenizer_path=NEPALESE_TOKENIZER_PATH):
         tokenizer_data = json.load(f)
     
     tokenizer = customBPE(num_merges=tokenizer_data.get("vocab_size", 16240))
-    tokenizer.merges = tokenizer_data["merges"]
+    merges_raw = tokenizer_data["merges"]
+    if isinstance(merges_raw, list):
+        tokenizer.merges = {tuple(pair): pair[0] + pair[1] for pair in merges_raw}
+        tokenizer.merge_ranks = {tuple(pair): idx for idx, pair in enumerate(merges_raw)}
+    elif isinstance(merges_raw, dict):
+        tokenizer.merges = merges_raw
+        tokenizer.merge_ranks = {pair: idx for idx, pair in enumerate(merges_raw.keys())}
     tokenizer.vocab = tokenizer_data.get("vocab", {})
-    tokenizer.merge_ranks = {pair: idx for idx, pair in enumerate(tokenizer.merges.keys())}
+    tokenizer.vocab_size = len(tokenizer.vocab)
     tokenizer._token_cache = {}
     
     print(f"Loaded Nepali 16k tokenizer: vocab_size={tokenizer.vocab_size}, merges={len(tokenizer.merges)}")
     return tokenizer
 
 
+class GPTModelWrapper(nn.Module):
+    """Adapter for GPTLanguageModel to provide standard TransformerLM evaluation interface."""
+
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+        self.context_length = getattr(model, 'context_len', 512)
+
+    def forward(self, input_ids, return_attention=False):
+        out = self.model(input_ids, return_attention=return_attention)
+        if isinstance(out, tuple):
+            logits = out[0]
+            if return_attention:
+                attn = out[2] if len(out) > 2 else None
+                return logits, attn
+            return logits
+        return out
+
+    @torch.no_grad()
+    def generate(
+        self,
+        input_ids: torch.Tensor,
+        max_new_tokens: int = 50,
+        temperature: float = 1.0,
+        top_k: int = 50,
+        top_p: float = 0.9,
+        repetition_penalty: float = 1.0,
+        return_attention: bool = False,
+    ):
+        import torch.nn.functional as F
+
+        B = input_ids.shape[0]
+        generated = input_ids
+        for _ in range(max_new_tokens):
+            cond = generated if generated.size(1) <= self.context_length else generated[:, -self.context_length:]
+            logits = self.forward(cond)
+            logits = logits[:, -1, :] / max(temperature, 1e-5)
+            if repetition_penalty != 1.0:
+                for b in range(B):
+                    for token_id in set(generated[b].tolist()):
+                        logits[b, token_id] /= repetition_penalty
+            if top_k is not None and top_k > 0:
+                v, _ = torch.topk(logits, min(top_k, logits.size(-1)))
+                logits[logits < v[:, [-1]]] = -float('inf')
+            if top_p is not None and top_p < 1.0:
+                sorted_logits, sorted_indices = torch.sort(logits, descending=True)
+                cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+                sorted_indices_to_remove = cumulative_probs > top_p
+                sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+                sorted_indices_to_remove[..., 0] = 0
+                indices_to_remove = sorted_indices_to_remove.scatter(1, sorted_indices, sorted_indices_to_remove)
+                logits[indices_to_remove] = -float('inf')
+            probs = F.softmax(logits, dim=-1)
+            next_token = torch.multinomial(probs, num_samples=1)
+            generated = torch.cat([generated, next_token], dim=1)
+        return generated
+
+
 def load_model_from_checkpoint(checkpoint_path, vocab_size):
     """Load model from checkpoint file."""
     print(f"Loading model from: {checkpoint_path}")
     
-    # Create model with the right architecture
-    model = TransformerLM(
-        vocab_size=vocab_size,
-        d_model=384,
-        n_layers=6,
-        n_heads=6,
-        d_ff=1536,
-        context_length=256,
-        dropout=0.1,
-    )
-    
-    # Load checkpoint if it exists
     if checkpoint_path and os.path.exists(checkpoint_path):
         checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
-        # Handle different checkpoint formats
-        state_key = None
+        state_dict = None
         for key in ['model_state_dict', 'model_state', 'state_dict']:
-            if key in checkpoint:
-                state_key = key
+            if isinstance(checkpoint, dict) and key in checkpoint:
+                state_dict = checkpoint[key]
+                print(f"Loaded checkpoint with key: {key}")
                 break
-        
-        if state_key:
-            model.load_state_dict(checkpoint[state_key])
-            print(f"Loaded checkpoint with key: {state_key}")
-        else:
-            # Try loading directly
-            model.load_state_dict(checkpoint)
-            print("Loaded checkpoint directly")
+        if state_dict is None and isinstance(checkpoint, dict):
+            state_dict = checkpoint
+
+        # Check if weights correspond to GPTLanguageModel
+        is_gpt_model = False
+        if isinstance(state_dict, dict):
+            keys = list(state_dict.keys())
+            if any(k.startswith("token_emb.") or "attn.W_q" in k for k in keys):
+                is_gpt_model = True
+
+        if is_gpt_model:
+            try:
+                from model import GPTLanguageModel
+                cfg = checkpoint.get('config', {}) if isinstance(checkpoint, dict) else {}
+                gpt_kwargs = {
+                    'vocab_size': cfg.get('vocab_size', vocab_size),
+                    'd_model': cfg.get('d_model', 512),
+                    'n_heads': cfg.get('n_heads', 8),
+                    'n_layers': cfg.get('n_layers', 6),
+                    'd_ff': cfg.get('d_ff', 1536),
+                    'context_len': cfg.get('context_len', cfg.get('context_length', 512)),
+                    'dropout': cfg.get('dropout', 0.1),
+                    'pad_token_id': cfg.get('pad_token_id', 0),
+                }
+                raw_model = GPTLanguageModel(**gpt_kwargs)
+                raw_model.load_state_dict(state_dict)
+                print("Loaded GPTLanguageModel architecture successfully")
+                model = GPTModelWrapper(raw_model)
+                model.eval()
+                return model
+            except Exception as e:
+                print(f"Warning: Failed to load as GPTLanguageModel ({e}), trying TransformerLM")
+
+        cfg = checkpoint.get('config', {}) if isinstance(checkpoint, dict) else {}
+        model = GPTLanguageModel(
+            vocab_size=cfg.get('vocab_size', vocab_size),
+            d_model=cfg.get('d_model', 384),
+            n_heads=cfg.get('n_heads', 6),
+            n_layers=cfg.get('n_layers', 6),
+            d_ff=cfg.get('d_ff', 1536),
+            context_len=cfg.get('context_length', cfg.get('context_len', 256)),
+            dropout=cfg.get('dropout', 0.1),
+        )
+        if state_dict is not None:
+            model.load_state_dict(state_dict)
+            print("Loaded GPTLanguageModel state dict")
     else:
         print("No checkpoint found, using untrained model")
+        model = GPTLanguageModel(
+            vocab_size=vocab_size,
+            d_model=384,
+            n_heads=6,
+            n_layers=6,
+            d_ff=1536,
+            context_len=256,
+            dropout=0.1,
+        )
     
     model.eval()
     return model
 
 
 def load_data_splits(data_dir, tokenizer, max_samples=1000):
-    """Load train/val/test data splits."""
-    from datasets import Dataset
-    
+    """Load train/val/test data splits efficiently."""
     splits = {}
     for split in ["train", "val", "test"]:
         jsonl_path = os.path.join(data_dir, f"{split}.jsonl")
         if os.path.exists(jsonl_path):
-            dataset = Dataset.from_json(jsonl_path)
-            texts = dataset["text"] if "text" in dataset.column_names else []
-            
             token_ids = []
-            for text in texts[:max_samples]:
-                if text and len(str(text)) >= 50:
-                    tokens = tokenizer.tokenize(str(text))
-                    if len(tokens) >= 50:
-                        token_ids.extend([tokenizer.vocab.get(t, 0) for t in tokens])
+            count = 0
+            with open(jsonl_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    if not line.strip():
+                        continue
+                    try:
+                        row = json.loads(line)
+                        text = row.get("text", "")
+                    except Exception:
+                        continue
+                    if text and len(str(text)) >= 50:
+                        tokens = tokenizer.tokenize(str(text))
+                        if len(tokens) >= 50:
+                            token_ids.extend([tokenizer.vocab.get(t, 0) for t in tokens])
+                            count += 1
+                            if max_samples and count >= max_samples:
+                                break
             
             splits[split] = token_ids
-            print(f"Loaded {split}: {len(splits[split])} tokens")
+            print(f"Loaded {split}: {len(splits[split])} tokens from {count} samples")
         else:
             # Create fallback data
             vocab_size = tokenizer.vocab_size
@@ -163,11 +269,9 @@ def prepare_dataloader(token_ids, seq_len=256, batch_size=8, shuffle=True):
     if not inputs:
         return None
     
-    from datasets import Dataset as DS
-    dataset = DS.from_dict({
-        "input_ids": inputs,
-        "target_ids": targets,
-    })
+    input_tensors = torch.tensor(inputs, dtype=torch.long)
+    target_tensors = torch.tensor(targets, dtype=torch.long)
+    dataset = torch.utils.data.TensorDataset(input_tensors, target_tensors)
     
     loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=0)
     return loader
@@ -207,12 +311,17 @@ def compute_all_metrics(model, dataloaders, device, tokenizer):
         all_generations = []
         all_references = []
         
-        for sample_batch in sample_results:
-            for item in sample_batch:
-                gen_text = item.get("generation", "")
-                if gen_text:
-                    all_generations.append(gen_text)
-                    all_references.append(prompts[0] if prompts else "")
+        items = []
+        for entry in sample_results:
+            if isinstance(entry, list):
+                items.extend(entry)
+            elif isinstance(entry, dict):
+                items.append(entry)
+        for item in items:
+            gen_text = item.get("generation", "")
+            if gen_text:
+                all_generations.append(gen_text)
+                all_references.append(prompts[0] if prompts else "")
     
     # Text-level metrics
     if all_generations:

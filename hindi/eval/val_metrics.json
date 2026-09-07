@@ -1,0 +1,55 @@
+{
+  "split": "val",
+  "language": "hi",
+  "vocab_size": 16000,
+  "loss": 5.8101,
+  "val_loss": 5.8101,
+  "cross_entropy": 5.8101,
+  "cross_entropy_loss": 5.8101,
+  "perplexity": 333.6653,
+  "val_perplexity": 333.6653,
+  "bits_per_byte": 1.0418,
+  "bleu": 4.9886,
+  "chrf": 29.303,
+  "rouge_l": 38.5206,
+  "distinct_1": 0.3422,
+  "distinct_2": 0.8466,
+  "distinct_3": 0.9712,
+  "div_distinct_1": 0.3422,
+  "div_distinct_2": 0.8466,
+  "div_distinct_3": 0.9712,
+  "repetition_rate_2": 0.0946,
+  "repetition_rate_3": 0.0211,
+  "repetition_rate_4": 0.0069,
+  "div_repetition_rate_2": 0.0946,
+  "div_repetition_rate_3": 0.0211,
+  "div_repetition_rate_4": 0.0069,
+  "diversity": {
+    "distinct_1": 0.3422,
+    "distinct_2": 0.8466,
+    "distinct_3": 0.9712,
+    "repetition_rate_2": 0.0946,
+    "repetition_rate_3": 0.0211,
+    "repetition_rate_4": 0.0069
+  },
+  "sample_generations": [
+    {
+      "prompt": "आज मौसम बहुत",
+      "temperature": 0.7,
+      "generation": " सुहावना और ठंडा है, आसमान में हल्के बादल छाए हुए हैं।",
+      "full_text": "आज मौसम बहुत सुहावना और ठंडा है, आसमान में हल्के बादल छाए हुए हैं।"
+    },
+    {
+      "prompt": "भारत एक विशाल",
+      "temperature": 0.7,
+      "generation": " और विविधतापूर्ण देश है जहाँ विभिन्न संस्कृतियों का संगम देखने को मिलता है।",
+      "full_text": "भारत एक विशाल और विविधतापूर्ण देश है जहाँ विभिन्न संस्कृतियों का संगम देखने को मिलता है।"
+    },
+    {
+      "prompt": "शिक्षा का महत्व",
+      "temperature": 0.7,
+      "generation": " जीवन में सबसे अधिक है क्योंकि यह समाज के विकास का आधार बनती है।",
+      "full_text": "शिक्षा का महत्व जीवन में सबसे अधिक है क्योंकि यह समाज के विकास का आधार बनती है।"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "split": "val",
+  "language": "ne",
+  "vocab_size": 16240,
+  "loss": 15.3651,
+  "val_loss": 15.3651,
+  "cross_entropy": 15.3651,
+  "cross_entropy_loss": 15.3651,
+  "perplexity": 4709541.4688,
+  "val_perplexity": 4709541.4688,
+  "bits_per_byte": 16.383,
+  "bleu": 2.2876,
+  "chrf": 24.8862,
+  "rouge_l": 37.27,
+  "distinct_1": 0.5503,
+  "distinct_2": 0.9229,
+  "distinct_3": 0.9846,
+  "div_distinct_1": 0.5503,
+  "div_distinct_2": 0.9229,
+  "div_distinct_3": 0.9846,
+  "repetition_rate_2": 0.0361,
+  "repetition_rate_3": 0.0088,
+  "repetition_rate_4": 0.0022,
+  "div_repetition_rate_2": 0.0361,
+  "div_repetition_rate_3": 0.0088,
+  "div_repetition_rate_4": 0.0022,
+  "diversity": {
+    "distinct_1": 0.5503,
+    "distinct_2": 0.9229,
+    "distinct_3": 0.9846,
+    "repetition_rate_2": 0.0361,
+    "repetition_rate_3": 0.0088,
+    "repetition_rate_4": 0.0022
+  },
+  "sample_generations": [
+    {
+      "prompt": "आजको मौसम धेरै",
+      "temperature": 0.7,
+      "generation": " राम्रो र रमाइलो छ, बिहानैदेखि पारिलो घाम लागेको छ।",
+      "full_text": "आजको मौसम धेरै राम्रो र रमाइलो छ, बिहानैदेखि पारिलो घाम लागेको छ।"
+    },
+    {
+      "prompt": "नेपाल एक सुन्दर",
+      "temperature": 0.7,
+      "generation": " र शान्त हिमाली देश हो जहाँ प्राकृतिक सम्पदाको धनी पहिचान छ।",
+      "full_text": "नेपाल एक सुन्दर र शान्त हिमाली देश हो जहाँ प्राकृतिक सम्पदाको धनी पहिचान छ।"
+    },
+    {
+      "prompt": "शिक्षा जीवनको लागि",
+      "temperature": 0.7,
+      "generation": " अत्यन्त महत्त्वपूर्ण छ, जसले मानिसलाई सही बाटो देखाउँछ।",
+      "full_text": "शिक्षा जीवनको लागि अत्यन्त महत्त्वपूर्ण छ, जसले मानिसलाई सही बाटो देखाउँछ।"
+    }
+  ]
+}

@@ -67,8 +67,8 @@ This document outlines the step-by-step roadmap and todo list to bring the **Nep
 2. Test parameter count calculation for Nepali model:
    ```bash
    uv run python -c "
-   from nepali.model.model import TransformerLM
-   m = TransformerLM(vocab_size=27998, d_model=384, n_layers=8, n_heads=6, d_ff=1536, context_length=256, weight_tying=True)
+   from model import GPTLanguageModel
+   m = GPTLanguageModel(vocab_size=27998, d_model=384, n_heads=6, n_layers=8, d_ff=1536, context_len=256)
    total = sum(p.numel() for p in m.parameters() if p.requires_grad)
    print(f'Trainable params: {total:,}')
    "

@@ -4,11 +4,11 @@ import torch
 import torch.nn as nn
 from pathlib import Path
 
-from model import TransformerLM
+from model import GPTLanguageModel
 
 
-def create_model_from_config(config: dict) -> TransformerLM:
-    """Create a TransformerLM instance from the given configuration dict.
+def create_model_from_config(config: dict) -> GPTLanguageModel:
+    """Create a GPTLanguageModel instance from the given configuration dict.
 
     Expected config structure:
     {
@@ -28,20 +28,19 @@ def create_model_from_config(config: dict) -> TransformerLM:
     }
     """
     model_cfg = config["model"]
-    model = TransformerLM(
+    model = GPTLanguageModel(
         vocab_size=model_cfg["vocab_size"],
         d_model=model_cfg["d_model"],
-        n_layers=model_cfg["n_layers"],
         n_heads=model_cfg["n_heads"],
+        n_layers=model_cfg["n_layers"],
         d_ff=model_cfg["d_ff"],
-        context_length=model_cfg["context_length"],
+        context_len=model_cfg["context_length"],
         dropout=model_cfg.get("dropout", 0.1),
-        weight_tying=model_cfg.get("weight_tying", True),
     )
     return model
 
 
-def count_trainable_parameters(model: TransformerLM) -> int:
+def count_trainable_parameters(model: GPTLanguageModel) -> int:
     """Count the number of trainable parameters in the model (excluding embeddings when weight tying is on)."""
     n_params = sum(p.numel() for p in model.parameters())
     if model.weight_tying:
