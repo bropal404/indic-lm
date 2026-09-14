@@ -1,0 +1,204 @@
+{"tid": "cmp_gt_weight", "task": "comparison", "program": "cmp_extreme", "role": "train", "text": "{a} का वजन {va} किलोग्राम है और {b} का वजन {vb} किलोग्राम है। किसका वजन अधिक है?", "args": {"target": "max"}}
+{"tid": "cmp_gt_height", "task": "comparison", "program": "cmp_extreme", "role": "train", "text": "{a} की ऊँचाई {va} सेंटीमीटर है और {b} की ऊँचाई {vb} सेंटीमीटर है। किसकी ऊँचाई अधिक है?", "args": {"target": "max"}}
+{"tid": "cmp_lt_age", "task": "comparison", "program": "cmp_extreme", "role": "train", "text": "{a} की उम्र {va} वर्ष है और {b} की उम्र {vb} वर्ष है। किसकी उम्र कम है?", "args": {"target": "min"}}
+{"tid": "cmp_lt_weight_g", "task": "comparison", "program": "cmp_extreme", "role": "train", "text": "{a} का वजन {va} ग्राम है और {b} का वजन {vb} ग्राम है। किसका वजन कम है?", "args": {"target": "min"}}
+{"tid": "cmp_gt_price", "task": "comparison", "program": "cmp_extreme", "role": "val", "text": "{a} की कीमत {va} रुपये है और {b} की कीमत {vb} रुपये है। किसकी कीमत अधिक है?", "args": {"target": "max"}}
+{"tid": "cmp_lt_distance", "task": "comparison", "program": "cmp_extreme", "role": "val", "text": "{a} की दूरी {va} किलोमीटर है और {b} की दूरी {vb} किलोमीटर है। किसकी दूरी कम है?", "args": {"target": "min"}}
+{"tid": "cmp_gt_serial", "task": "comparison", "program": "cmp_extreme", "role": "test", "text": "{a} और {b} के दाम क्रमशः {va} रुपये और {vb} रुपये हैं। अधिक दाम किसका है?", "args": {"target": "max"}}
+{"tid": "cmp_lt_serial", "task": "comparison", "program": "cmp_extreme", "role": "test", "text": "{a} और {b} की क्षमता क्रमशः {va} लीटर और {vb} लीटर है। कम क्षमता किसकी है?", "args": {"target": "min"}}
+{"tid": "tr_gt_max_weight", "task": "transitive", "program": "trans_extreme", "role": "train", "text": "{p1} का वजन {p2} से अधिक है और {p2} का वजन {p3} से अधिक है। सबसे अधिक वजन किसका है?", "args": {"relation": "gt", "target": "max"}}
+{"tid": "tr_gt_min_weight", "task": "transitive", "program": "trans_extreme", "role": "train", "text": "{p1} का वजन {p2} से अधिक है और {p2} का वजन {p3} से अधिक है। सबसे कम वजन किसका है?", "args": {"relation": "gt", "target": "min"}}
+{"tid": "tr_lt_max_price", "task": "transitive", "program": "trans_extreme", "role": "train", "text": "{p1} की कीमत {p2} से कम है और {p2} की कीमत {p3} से कम है। सबसे अधिक कीमत किसकी है?", "args": {"relation": "lt", "target": "max"}}
+{"tid": "tr_lt_min_height", "task": "transitive", "program": "trans_extreme", "role": "train", "text": "{p1} की ऊँचाई {p2} से कम है और {p2} की ऊँचाई {p3} से कम है। सबसे कम ऊँचाई किसकी है?", "args": {"relation": "lt", "target": "min"}}
+{"tid": "tr_gt_max_age", "task": "transitive", "program": "trans_extreme", "role": "val", "text": "{p1} की उम्र {p2} से अधिक है, और {p2} की उम्र {p3} से अधिक है। सबसे अधिक उम्र किसकी है?", "args": {"relation": "gt", "target": "max"}}
+{"tid": "tr_lt_min_money", "task": "transitive", "program": "trans_extreme", "role": "val", "text": "{p1} के पास {p2} से कम पैसे हैं और {p2} के पास {p3} से कम पैसे हैं। सबसे कम पैसे किसके पास हैं?", "args": {"relation": "lt", "target": "min"}}
+{"tid": "tr_gt_min_score", "task": "transitive", "program": "trans_extreme", "role": "test", "text": "{p1} का अंक {p2} से ऊपर है तथा {p2} का अंक {p3} से ऊपर है। इनमें सबसे नीचे कौन है?", "args": {"relation": "gt", "target": "min"}}
+{"tid": "tr_lt_max_load", "task": "transitive", "program": "trans_extreme", "role": "test", "text": "{p1} का भार {p2} से हल्का है तथा {p2} का भार {p3} से हल्का है। सबसे अधिक भार किसका है?", "args": {"relation": "lt", "target": "max"}}
+{"tid": "tr_yn_true_value", "task": "transitive", "program": "trans_yesno", "role": "train", "text": "{p1} का मान {p2} से अधिक है और {p2} का मान {p3} से अधिक है। क्या {p1} का मान {p3} से अधिक है?", "args": {"relation": "gt", "query": "p1_gt_p3"}}
+{"tid": "tr_yn_false_value", "task": "transitive", "program": "trans_yesno", "role": "train", "text": "{p1} का मान {p2} से अधिक है और {p2} का मान {p3} से अधिक है। क्या {p3} का मान {p1} से अधिक है?", "args": {"relation": "gt", "query": "p3_gt_p1"}}
+{"tid": "tr_yn_true_price", "task": "transitive", "program": "trans_yesno", "role": "val", "text": "{p1} की कीमत {p2} से कम है और {p2} की कीमत {p3} से कम है। क्या {p3} की कीमत {p1} से अधिक है?", "args": {"relation": "lt", "query": "p3_gt_p1"}}
+{"tid": "tr_yn_false_price", "task": "transitive", "program": "trans_yesno", "role": "test", "text": "{p1} की कीमत {p2} से कम है और {p2} की कीमत {p3} से कम है। क्या {p1} की कीमत {p3} से अधिक है?", "args": {"relation": "lt", "query": "p1_gt_p3"}}
+{"tid": "ar_add_buy", "task": "arithmetic", "program": "arith_add", "role": "train", "text": "{a} के पास {x} {o1} थे। {a} ने {y} {o1} और खरीदे। अब कुल कितने {o1} हैं?", "args": {}}
+{"tid": "ar_sub_box", "task": "arithmetic", "program": "arith_sub", "role": "train", "text": "एक डिब्बे में {x} {o1} थे। उनमें से {y} निकाल लिए गए। अब कितने बचे?", "args": {}}
+{"tid": "ar_mul_rows", "task": "arithmetic", "program": "arith_mul", "role": "train", "text": "एक मेज़ पर {x} पंक्तियाँ हैं और हर पंक्ति में {y} {o1} हैं। कुल कितने {o1} हैं?", "args": {}}
+{"tid": "ar_div_share", "task": "arithmetic", "program": "arith_div", "role": "train", "text": "{x} {o1} को {y} बराबर हिस्सों में बाँटा गया। हर हिस्से में कितने {o1} आएँगे?", "args": {}}
+{"tid": "ar_add_total", "task": "arithmetic", "program": "arith_add", "role": "val", "text": "{o1} की कीमत {x} रुपये और {o2} की कीमत {y} रुपये है। दोनों की कुल कीमत कितनी है?", "args": {}}
+{"tid": "ar_mul_packs", "task": "arithmetic", "program": "arith_mul", "role": "val", "text": "एक पैकेट में {y} {o1} आते हैं। ऐसे {x} पैकेट में कुल कितने {o1} होंगे?", "args": {}}
+{"tid": "ar_sub_diff", "task": "arithmetic", "program": "arith_sub", "role": "test", "text": "{a} के पास {x} {o1} हैं और {y} {o1} उसने दे दिए। शेष संख्या कितनी रह जाती है?", "args": {}}
+{"tid": "ar_add_plain", "task": "arithmetic", "program": "arith_add", "role": "test", "text": "{x} और {y} का योग क्या होगा?", "args": {}}
+{"tid": "ar_mul_plain", "task": "arithmetic", "program": "arith_mul", "role": "test", "text": "{x} को {y} से गुणा करने पर क्या परिणाम आएगा?", "args": {}}
+{"tid": "ar_div_plain", "task": "arithmetic", "program": "arith_div", "role": "test", "text": "{x} को {y} से भाग देने पर भागफल क्या होगा?", "args": {}}
+{"tid": "pc_disc_shop", "task": "percentage", "program": "pct_discount", "role": "train", "text": "{o1} की कीमत {x} रुपये है और उस पर {p}% की छूट है। छूट के बाद कीमत कितनी होगी?", "args": {}}
+{"tid": "pc_of_class", "task": "percentage", "program": "pct_of", "role": "train", "text": "{x} विद्यार्थियों में से {p}% विद्यार्थी उपस्थित हैं। कितने विद्यार्थी उपस्थित हैं?", "args": {}}
+{"tid": "pc_inc_salary", "task": "percentage", "program": "pct_increase", "role": "train", "text": "किसी वस्तु का मान {x} है। इसमें {p}% की वृद्धि होने पर नया मान क्या होगा?", "args": {}}
+{"tid": "pc_dec_plain", "task": "percentage", "program": "pct_discount", "role": "train", "text": "{x} में {p}% की कमी करने पर नया मान कितना होगा?", "args": {}}
+{"tid": "pc_of_votes", "task": "percentage", "program": "pct_of", "role": "val", "text": "कुल {x} मतों में से {p}% मत एक पक्ष को मिले। उस पक्ष को कितने मत मिले?", "args": {}}
+{"tid": "pc_inc_price", "task": "percentage", "program": "pct_increase", "role": "val", "text": "{o1} का दाम {x} रुपये था। दाम में {p}% की बढ़ोतरी हुई। अब दाम कितना है?", "args": {}}
+{"tid": "pc_disc_sale", "task": "percentage", "program": "pct_discount", "role": "test", "text": "सेल में {o1} पर {p}% छूट दी जा रही है। यदि मूल कीमत {x} रुपये है, तो देय राशि कितनी होगी?", "args": {}}
+{"tid": "pc_of_water", "task": "percentage", "program": "pct_of", "role": "test", "text": "एक टंकी में {x} लीटर पानी है। उसका {p}% भाग निकाल लिया गया। कितने लीटर निकाला गया?", "args": {}}
+{"tid": "pc_inc_rent", "task": "percentage", "program": "pct_increase", "role": "test", "text": "किराया {x} रुपये था और उसमें {p}% की वृद्धि कर दी गई। नया किराया कितना है?", "args": {}}
+{"tid": "ra_other_items", "task": "ratio", "program": "ratio_other", "role": "train", "text": "{a} और {b} के पास वस्तुओं की संख्या का अनुपात {m}:{n} है। यदि {a} के पास {x} वस्तुएँ हैं, तो {b} के पास कितनी हैं?", "args": {}}
+{"tid": "ra_part_mix", "task": "ratio", "program": "ratio_part", "role": "train", "text": "एक मिश्रण में पानी और दूध का अनुपात {m}:{n} है। कुल मिश्रण {t} लीटर है। पानी कितने लीटर है?", "args": {}}
+{"tid": "ra_other_age", "task": "ratio", "program": "ratio_other", "role": "val", "text": "{a} और {b} की उम्र का अनुपात {m}:{n} है। यदि {a} की उम्र {x} वर्ष है, तो {b} की उम्र कितनी है?", "args": {}}
+{"tid": "ra_part_money", "task": "ratio", "program": "ratio_part", "role": "val", "text": "{t} रुपये को {m}:{n} के अनुपात में दो हिस्सों में बाँटा गया। पहला हिस्सा कितने रुपये का है?", "args": {}}
+{"tid": "ra_other_weight", "task": "ratio", "program": "ratio_other", "role": "test", "text": "दो थैलों के वजन का अनुपात {m}:{n} है। पहले थैले का वजन {x} किलोग्राम है, तो दूसरे का वजन कितना है?", "args": {}}
+{"tid": "ra_part_class", "task": "ratio", "program": "ratio_part", "role": "test", "text": "एक कक्षा में लड़कों और लड़कियों का अनुपात {m}:{n} है और कुल {t} विद्यार्थी हैं। लड़के कितने हैं?", "args": {}}
+{"tid": "al_add_inv", "task": "algebra", "program": "alg_add_inv", "role": "train", "text": "किसी संख्या में {b} जोड़ने पर {c} मिलता है। वह संख्या क्या है?", "args": {}}
+{"tid": "al_sub_inv", "task": "algebra", "program": "alg_sub_inv", "role": "train", "text": "किसी संख्या में से {b} घटाने पर {c} मिलता है। वह संख्या क्या है?", "args": {}}
+{"tid": "al_mul_inv", "task": "algebra", "program": "alg_mul_inv", "role": "train", "text": "किसी संख्या का {m} गुना {c} है। वह संख्या क्या है?", "args": {}}
+{"tid": "al_linear_plus", "task": "algebra", "program": "alg_linear_plus", "role": "train", "text": "किसी संख्या को {m} से गुणा करके {b} जोड़ने पर {c} मिलता है। वह संख्या क्या है?", "args": {}}
+{"tid": "al_linear_minus", "task": "algebra", "program": "alg_linear_minus", "role": "train", "text": "किसी संख्या को {m} से गुणा करके {b} घटाने पर {c} मिलता है। वह संख्या क्या है?", "args": {}}
+{"tid": "al_add_inv_v", "task": "algebra", "program": "alg_add_inv", "role": "val", "text": "एक संख्या और {b} का योग {c} है। वह संख्या क्या है?", "args": {}}
+{"tid": "al_linear_plus_v", "task": "algebra", "program": "alg_linear_plus", "role": "val", "text": "यदि {m}x + {b} = {c} है, तो x का मान क्या है?", "args": {}}
+{"tid": "al_mul_inv_t", "task": "algebra", "program": "alg_mul_inv", "role": "test", "text": "यदि {m}x = {c} है, तो x का मान क्या होगा?", "args": {}}
+{"tid": "al_sub_inv_t", "task": "algebra", "program": "alg_sub_inv", "role": "test", "text": "एक संख्या में से {b} घटाया गया और परिणाम {c} आया। मूल संख्या क्या थी?", "args": {}}
+{"tid": "al_linear_minus_t", "task": "algebra", "program": "alg_linear_minus", "role": "test", "text": "यदि {m}x − {b} = {c} है, तो x का मान क्या होगा?", "args": {}}
+{"tid": "al_add_inv_t", "task": "algebra", "program": "alg_add_inv", "role": "test", "text": "यदि x + {b} = {c} है, तो x का मान क्या होगा?", "args": {}}
+{"tid": "al_linear_plus_t", "task": "algebra", "program": "alg_linear_plus", "role": "test", "text": "एक संख्या को {m} गुना करके उसमें {b} जोड़ा गया और {c} प्राप्त हुआ। मूल संख्या क्या थी?", "args": {}}
+{"tid": "uconv_f1_m_cm", "task": "unit_conversion", "program": "unit_convert", "role": "train", "text": "{x} मीटर में कितने सेंटीमीटर होते हैं?", "args": {"factor": 100, "low": 1, "high": 400, "pair": "m_cm"}}
+{"tid": "uconv_f1_km_m", "task": "unit_conversion", "program": "unit_convert", "role": "train", "text": "{x} किलोमीटर में कितने मीटर होते हैं?", "args": {"factor": 1000, "low": 1, "high": 300, "pair": "km_m"}}
+{"tid": "uconv_f1_kg_g", "task": "unit_conversion", "program": "unit_convert", "role": "train", "text": "{x} किलोग्राम में कितने ग्राम होते हैं?", "args": {"factor": 1000, "low": 1, "high": 300, "pair": "kg_g"}}
+{"tid": "uconv_f1_l_ml", "task": "unit_conversion", "program": "unit_convert", "role": "train", "text": "{x} लीटर में कितने मिलीलीटर होते हैं?", "args": {"factor": 1000, "low": 1, "high": 250, "pair": "l_ml"}}
+{"tid": "uconv_f1_min_s", "task": "unit_conversion", "program": "unit_convert", "role": "train", "text": "{x} मिनट में कितने सेकंड होते हैं?", "args": {"factor": 60, "low": 1, "high": 300, "pair": "min_s"}}
+{"tid": "uconv_f1_h_min", "task": "unit_conversion", "program": "unit_convert", "role": "train", "text": "{x} घंटे में कितने मिनट होते हैं?", "args": {"factor": 60, "low": 1, "high": 96, "pair": "h_min"}}
+{"tid": "uconv_f2_m_cm", "task": "unit_conversion", "program": "unit_convert", "role": "val", "text": "{x} मीटर को सेंटीमीटर में बदलने पर कितना मिलेगा?", "args": {"factor": 100, "low": 1, "high": 400, "pair": "m_cm"}}
+{"tid": "uconv_f2_km_m", "task": "unit_conversion", "program": "unit_convert", "role": "val", "text": "{x} किलोमीटर को मीटर में बदलने पर कितना मिलेगा?", "args": {"factor": 1000, "low": 1, "high": 300, "pair": "km_m"}}
+{"tid": "uconv_f2_kg_g", "task": "unit_conversion", "program": "unit_convert", "role": "val", "text": "{x} किलोग्राम को ग्राम में बदलने पर कितना मिलेगा?", "args": {"factor": 1000, "low": 1, "high": 300, "pair": "kg_g"}}
+{"tid": "uconv_f2_l_ml", "task": "unit_conversion", "program": "unit_convert", "role": "val", "text": "{x} लीटर को मिलीलीटर में बदलने पर कितना मिलेगा?", "args": {"factor": 1000, "low": 1, "high": 250, "pair": "l_ml"}}
+{"tid": "uconv_f2_min_s", "task": "unit_conversion", "program": "unit_convert", "role": "val", "text": "{x} मिनट को सेकंड में बदलने पर कितना मिलेगा?", "args": {"factor": 60, "low": 1, "high": 300, "pair": "min_s"}}
+{"tid": "uconv_f2_h_min", "task": "unit_conversion", "program": "unit_convert", "role": "val", "text": "{x} घंटे को मिनट में बदलने पर कितना मिलेगा?", "args": {"factor": 60, "low": 1, "high": 96, "pair": "h_min"}}
+{"tid": "uconv_f3_m_cm", "task": "unit_conversion", "program": "unit_convert", "role": "test", "text": "किसी माप का मान {x} मीटर है। वही माप सेंटीमीटर में कितना होगा?", "args": {"factor": 100, "low": 1, "high": 400, "pair": "m_cm"}}
+{"tid": "uconv_f3_km_m", "task": "unit_conversion", "program": "unit_convert", "role": "test", "text": "किसी माप का मान {x} किलोमीटर है। वही माप मीटर में कितना होगा?", "args": {"factor": 1000, "low": 1, "high": 300, "pair": "km_m"}}
+{"tid": "uconv_f3_kg_g", "task": "unit_conversion", "program": "unit_convert", "role": "test", "text": "किसी माप का मान {x} किलोग्राम है। वही माप ग्राम में कितना होगा?", "args": {"factor": 1000, "low": 1, "high": 300, "pair": "kg_g"}}
+{"tid": "uconv_f3_l_ml", "task": "unit_conversion", "program": "unit_convert", "role": "test", "text": "किसी माप का मान {x} लीटर है। वही माप मिलीलीटर में कितना होगा?", "args": {"factor": 1000, "low": 1, "high": 250, "pair": "l_ml"}}
+{"tid": "uconv_f3_min_s", "task": "unit_conversion", "program": "unit_convert", "role": "test", "text": "किसी माप का मान {x} मिनट है। वही माप सेकंड में कितना होगा?", "args": {"factor": 60, "low": 1, "high": 300, "pair": "min_s"}}
+{"tid": "uconv_f3_h_min", "task": "unit_conversion", "program": "unit_convert", "role": "test", "text": "किसी माप का मान {x} घंटे है। वही माप मिनट में कितना होगा?", "args": {"factor": 60, "low": 1, "high": 96, "pair": "h_min"}}
+{"tid": "sd_dist_vehicle", "task": "speed_distance", "program": "sd_distance", "role": "train", "text": "एक वाहन {v} किलोमीटर प्रति घंटा की गति से {t} घंटे चलता है। वह कितने किलोमीटर की दूरी तय करेगा?", "args": {}}
+{"tid": "sd_time_trip", "task": "speed_distance", "program": "sd_time", "role": "train", "text": "{d} किलोमीटर की दूरी {v} किलोमीटर प्रति घंटा की गति से तय करने में कितने घंटे लगेंगे?", "args": {}}
+{"tid": "sd_speed_runner", "task": "speed_distance", "program": "sd_speed", "role": "train", "text": "एक धावक {d} मीटर की दूरी {t} सेकंड में तय करता है। उसकी गति मीटर प्रति सेकंड में कितनी है?", "args": {}}
+{"tid": "sd_dist_train", "task": "speed_distance", "program": "sd_distance", "role": "val", "text": "एक रेलगाड़ी {t} घंटे तक {v} किलोमीटर प्रति घंटा की एकसमान गति से चली। कुल दूरी कितनी रही?", "args": {}}
+{"tid": "sd_speed_cycle", "task": "speed_distance", "program": "sd_speed", "role": "val", "text": "एक साइकिल {d} मीटर की दूरी {t} सेकंड में पूरी करती है। उसकी औसत गति कितनी है?", "args": {}}
+{"tid": "sd_time_walk", "task": "speed_distance", "program": "sd_time", "role": "test", "text": "यदि चलने की गति {v} किलोमीटर प्रति घंटा हो, तो {d} किलोमीटर चलने में कितना समय लगेगा?", "args": {}}
+{"tid": "sd_dist_bus", "task": "speed_distance", "program": "sd_distance", "role": "test", "text": "एक बस की गति {v} किलोमीटर प्रति घंटा है। {t} घंटे में वह कितनी दूरी तय करेगी?", "args": {}}
+{"tid": "sd_speed_t", "task": "speed_distance", "program": "sd_speed", "role": "test", "text": "{t} सेकंड में {d} मीटर तय किए गए। गति मीटर प्रति सेकंड में ज्ञात कीजिए।", "args": {}}
+{"tid": "fm_force", "task": "physics_fma", "program": "fma_force", "role": "train", "text": "किसी वस्तु का द्रव्यमान {m} किलोग्राम और त्वरण {a} मीटर प्रति सेकंड वर्ग है। F = ma के अनुसार बल कितने न्यूटन है?", "args": {}}
+{"tid": "fm_accel", "task": "physics_fma", "program": "fma_accel", "role": "train", "text": "{m} किलोग्राम की वस्तु पर {f} न्यूटन का बल लगता है। उसका त्वरण कितना होगा?", "args": {}}
+{"tid": "fm_mass", "task": "physics_fma", "program": "fma_mass", "role": "train", "text": "किसी वस्तु पर {f} न्यूटन बल लगने से {a} मीटर प्रति सेकंड वर्ग का त्वरण उत्पन्न होता है। वस्तु का द्रव्यमान कितना है?", "args": {}}
+{"tid": "fm_force_v", "task": "physics_fma", "program": "fma_force", "role": "val", "text": "{m} किलोग्राम द्रव्यमान की वस्तु में {a} मीटर प्रति सेकंड वर्ग का त्वरण है। उस पर लगने वाला बल कितना है?", "args": {}}
+{"tid": "fm_accel_t", "task": "physics_fma", "program": "fma_accel", "role": "test", "text": "यदि {f} न्यूटन का बल {m} किलोग्राम की वस्तु पर लगे, तो उत्पन्न त्वरण का मान क्या होगा?", "args": {}}
+{"tid": "fm_force_t", "task": "physics_fma", "program": "fma_force", "role": "test", "text": "द्रव्यमान {m} किलोग्राम तथा त्वरण {a} मीटर प्रति सेकंड वर्ग दिया गया है। बल का मान ज्ञात कीजिए।", "args": {}}
+{"tid": "fm_mass_t", "task": "physics_fma", "program": "fma_mass", "role": "test", "text": "{f} न्यूटन बल से {a} मीटर प्रति सेकंड वर्ग का त्वरण मिलता है। द्रव्यमान का मान ज्ञात कीजिए।", "args": {}}
+{"tid": "dn_density", "task": "physics_density", "program": "den_density", "role": "train", "text": "किसी पदार्थ का द्रव्यमान {m} ग्राम और आयतन {v} घन सेंटीमीटर है। घनत्व कितना है?", "args": {}}
+{"tid": "dn_mass", "task": "physics_density", "program": "den_mass", "role": "train", "text": "किसी पदार्थ का घनत्व {d} ग्राम प्रति घन सेंटीमीटर और आयतन {v} घन सेंटीमीटर है। द्रव्यमान कितना है?", "args": {}}
+{"tid": "dn_volume", "task": "physics_density", "program": "den_volume", "role": "train", "text": "किसी वस्तु का द्रव्यमान {m} ग्राम और घनत्व {d} ग्राम प्रति घन सेंटीमीटर है। उसका आयतन कितना है?", "args": {}}
+{"tid": "dn_density_v", "task": "physics_density", "program": "den_density", "role": "val", "text": "{v} घन सेंटीमीटर आयतन वाली वस्तु का द्रव्यमान {m} ग्राम है। उसका घनत्व ज्ञात कीजिए।", "args": {}}
+{"tid": "dn_mass_t", "task": "physics_density", "program": "den_mass", "role": "test", "text": "यदि घनत्व {d} ग्राम प्रति घन सेंटीमीटर हो और आयतन {v} घन सेंटीमीटर हो, तो द्रव्यमान का मान क्या होगा?", "args": {}}
+{"tid": "dn_volume_t", "task": "physics_density", "program": "den_volume", "role": "test", "text": "{m} ग्राम द्रव्यमान और {d} ग्राम प्रति घन सेंटीमीटर घनत्व वाली वस्तु का आयतन ज्ञात कीजिए।", "args": {}}
+{"tid": "dn_density_t", "task": "physics_density", "program": "den_density", "role": "test", "text": "द्रव्यमान {m} ग्राम और आयतन {v} घन सेंटीमीटर दिया गया है। घनत्व का मान क्या होगा?", "args": {}}
+{"tid": "wk_work", "task": "physics_work", "program": "work_work", "role": "train", "text": "{f} न्यूटन का बल किसी वस्तु को उसी दिशा में {d} मीटर ले जाता है। W = Fd के अनुसार किया गया कार्य कितना है?", "args": {}}
+{"tid": "wk_power", "task": "physics_work", "program": "work_power", "role": "train", "text": "{w} जूल कार्य {t} सेकंड में किया गया। शक्ति कितने वाट है?", "args": {}}
+{"tid": "wk_from_power", "task": "physics_work", "program": "work_from_power", "role": "train", "text": "एक मशीन {p} वाट की शक्ति से {t} सेकंड तक चलती है। उसने कुल कितना कार्य किया?", "args": {}}
+{"tid": "wk_work_v", "task": "physics_work", "program": "work_work", "role": "val", "text": "किसी वस्तु पर {f} न्यूटन बल लगाकर उसे {d} मीटर खिसकाया गया। कार्य का मान क्या है?", "args": {}}
+{"tid": "wk_power_t", "task": "physics_work", "program": "work_power", "role": "test", "text": "यदि {t} सेकंड में {w} जूल कार्य होता है, तो शक्ति का मान क्या होगा?", "args": {}}
+{"tid": "wk_from_power_t", "task": "physics_work", "program": "work_from_power", "role": "test", "text": "{p} वाट शक्ति वाला उपकरण {t} सेकंड चलता है। कुल कार्य ज्ञात कीजिए।", "args": {}}
+{"tid": "wk_work_t", "task": "physics_work", "program": "work_work", "role": "test", "text": "{d} मीटर की दूरी तक {f} न्यूटन का बल लगाया गया। कार्य का मान ज्ञात कीजिए।", "args": {}}
+{"tid": "mh_spend_earn", "task": "multi_hop", "program": "mh_spend_earn", "role": "train", "text": "{a} के पास {x} रुपये थे। {a} ने {y} रुपये खर्च किए और बाद में {z} रुपये और मिले। अब कितने रुपये हैं?", "args": {}}
+{"tid": "mh_give_return", "task": "multi_hop", "program": "mh_spend_earn", "role": "train", "text": "{a} के पास {x} {o1} थे। {a} ने {y} {o1} मित्र को दिए और मित्र ने उनमें से {z} वापस कर दिए। अब कितने {o1} हैं?", "args": {}}
+{"tid": "mh_sell_percent", "task": "multi_hop", "program": "mh_sell_percent", "role": "train", "text": "एक दुकान में {x} वस्तुएँ थीं। सुबह {y} वस्तुएँ बिकीं और दोपहर में बची हुई वस्तुओं का {p}% बिक गया। अंत में कितनी वस्तुएँ बचीं?", "args": {}}
+{"tid": "mh_add_mul", "task": "multi_hop", "program": "mh_add_then_mul", "role": "train", "text": "एक संख्या {x} है। पहले उसमें {y} जोड़ा जाता है, फिर परिणाम को {m} से गुणा किया जाता है। अंतिम परिणाम क्या है?", "args": {}}
+{"tid": "mh_spend_earn_v", "task": "multi_hop", "program": "mh_spend_earn", "role": "val", "text": "{a} के खाते में {x} रुपये थे। {y} रुपये निकाले गए और फिर {z} रुपये जमा किए गए। अब शेष कितना है?", "args": {}}
+{"tid": "mh_add_mul_v", "task": "multi_hop", "program": "mh_add_then_mul", "role": "val", "text": "{x} में {y} जोड़िए और प्राप्त संख्या को {m} गुना कीजिए। उत्तर क्या है?", "args": {}}
+{"tid": "mh_sell_percent_t", "task": "multi_hop", "program": "mh_sell_percent", "role": "test", "text": "गोदाम में {x} बोरे थे। पहले {y} बोरे भेज दिए गए, फिर बचे हुए बोरों में से {p}% और भेजे गए। अब कितने बोरे शेष हैं?", "args": {}}
+{"tid": "mh_spend_earn_t", "task": "multi_hop", "program": "mh_spend_earn", "role": "test", "text": "शुरू में {x} इकाइयाँ थीं। {y} इकाइयाँ घटीं और उसके बाद {z} इकाइयाँ बढ़ीं। अंतिम संख्या क्या है?", "args": {}}
+{"tid": "mh_add_mul_t", "task": "multi_hop", "program": "mh_add_then_mul", "role": "test", "text": "{x} में पहले {y} जोड़ा जाता है और उसके बाद योग को {m} से गुणा किया जाता है। परिणाम क्या होगा?", "args": {}}
+{"tid": "lg_mp", "task": "logic", "program": "log_modus_ponens", "role": "train", "text": "यदि {cond} तो {result}। इस समय {cond_fact}। क्या {result_q}?", "args": {}}
+{"tid": "lg_mt", "task": "logic", "program": "log_modus_tollens", "role": "train", "text": "यदि {cond} तो {result}। लेकिन {result_neg_fact}। क्या यह निश्चित है कि {cond_q}?", "args": {}}
+{"tid": "lg_ac_certain", "task": "logic", "program": "log_affirm_consequent_certain", "role": "train", "text": "यदि {cond} तो {result}। अभी {result_fact}। क्या यह निश्चित है कि {cond_q}?", "args": {}}
+{"tid": "lg_ac_possible", "task": "logic", "program": "log_affirm_consequent_possible", "role": "train", "text": "यदि {cond} तो {result}। अभी {result_fact}। क्या यह संभव है कि {cond_q}?", "args": {}}
+{"tid": "lg_da", "task": "logic", "program": "log_deny_antecedent", "role": "train", "text": "यदि {cond} तो {result}। इस समय {cond_neg_fact}। क्या यह निश्चित है कि {result_q_neg}?", "args": {}}
+{"tid": "lg_mp_v", "task": "logic", "program": "log_modus_ponens", "role": "val", "text": "नियम यह है कि {cond} तो {result}। दिया गया है कि {cond_fact}। क्या {result_q}?", "args": {}}
+{"tid": "lg_mt_v", "task": "logic", "program": "log_modus_tollens", "role": "val", "text": "नियम: {cond} तो {result}। देखा गया कि {result_neg_fact}। क्या निश्चित रूप से कहा जा सकता है कि {cond_q}?", "args": {}}
+{"tid": "lg_ac_possible_v", "task": "logic", "program": "log_affirm_consequent_possible", "role": "val", "text": "नियम: {cond} तो {result}। देखा गया कि {result_fact}। क्या यह संभव है कि {cond_q}?", "args": {}}
+{"tid": "lg_mp_t", "task": "logic", "program": "log_modus_ponens", "role": "test", "text": "मान लीजिए {cond} तो {result}। प्रेक्षण यह है कि {cond_fact}। इस आधार पर, क्या {result_q}?", "args": {}}
+{"tid": "lg_mt_t", "task": "logic", "program": "log_modus_tollens", "role": "test", "text": "मान लीजिए {cond} तो {result}। प्रेक्षण यह है कि {result_neg_fact}। इस आधार पर क्या यह निश्चित है कि {cond_q}?", "args": {}}
+{"tid": "lg_ac_certain_t", "task": "logic", "program": "log_affirm_consequent_certain", "role": "test", "text": "मान लीजिए {cond} तो {result}। प्रेक्षण यह है कि {result_fact}। इस आधार पर क्या यह निश्चित है कि {cond_q}?", "args": {}}
+{"tid": "lg_da_t", "task": "logic", "program": "log_deny_antecedent", "role": "test", "text": "मान लीजिए {cond} तो {result}। प्रेक्षण यह है कि {cond_neg_fact}। इस आधार पर क्या यह निश्चित है कि {result_q_neg}?", "args": {}}
+{"tid": "lg_ac_possible_t", "task": "logic", "program": "log_affirm_consequent_possible", "role": "test", "text": "मान लीजिए {cond} तो {result}। प्रेक्षण यह है कि {result_fact}। इस आधार पर क्या यह संभव है कि {cond_q}?", "args": {}}
+{"tid": "cs_choice_a", "task": "common_sense", "program": "cs_choice", "role": "train", "text": "{stem} {opt1} और {opt2} में से कौन-सा विकल्प अधिक उपयुक्त है?", "args": {}}
+{"tid": "cs_dir_a", "task": "common_sense", "program": "cs_direction", "role": "train", "text": "{stem}", "args": {}}
+{"tid": "cs_choice_v", "task": "common_sense", "program": "cs_choice", "role": "val", "text": "{stem} इस स्थिति में {opt1} और {opt2} में से क्या करना बेहतर होगा?", "args": {}}
+{"tid": "cs_choice_t", "task": "common_sense", "program": "cs_choice", "role": "test", "text": "{stem} नीचे दिए विकल्पों — {opt1}, {opt2} — में से कौन-सा चुनना ठीक रहेगा?", "args": {}}
+{"tid": "cs_dir_t", "task": "common_sense", "program": "cs_direction", "role": "test", "text": "स्थिति इस प्रकार है: {stem}", "args": {}}
+{"tid": "ct_sum_class", "task": "counting", "program": "count_sum", "role": "train", "text": "एक कक्षा में {a} लड़के और {b} लड़कियाँ हैं। कुल विद्यार्थी कितने हैं?", "args": {}}
+{"tid": "ct_diff_balls", "task": "counting", "program": "count_diff", "role": "train", "text": "एक टोकरी में {a} लाल गेंदें और {b} नीली गेंदें हैं। लाल गेंदें नीली गेंदों से कितनी अधिक हैं?", "args": {}}
+{"tid": "ct_choose", "task": "counting", "program": "count_choose", "role": "train", "text": "{n} वस्तुओं में से {k} वस्तुएँ चुननी हैं। यदि क्रम मायने नहीं रखता, तो कितने चयन संभव हैं?", "args": {}}
+{"tid": "ct_even", "task": "counting", "program": "count_even_below", "role": "train", "text": "{n} से छोटी धनात्मक सम संख्याएँ कितनी हैं?", "args": {}}
+{"tid": "ct_sum_shelf", "task": "counting", "program": "count_sum", "role": "val", "text": "एक अलमारी में {a} किताबें और {b} पत्रिकाएँ हैं। कुल कितनी वस्तुएँ हैं?", "args": {}}
+{"tid": "ct_choose_v", "task": "counting", "program": "count_choose", "role": "val", "text": "{n} विद्यार्थियों में से {k} विद्यार्थियों की एक टीम बनानी है। कितनी टीमें बन सकती हैं?", "args": {}}
+{"tid": "ct_diff_t", "task": "counting", "program": "count_diff", "role": "test", "text": "पहले डिब्बे में {a} वस्तुएँ और दूसरे में {b} वस्तुएँ हैं। दोनों की संख्या में अंतर कितना है?", "args": {}}
+{"tid": "ct_even_t", "task": "counting", "program": "count_even_below", "role": "test", "text": "1 से लेकर {n} से ठीक पहले तक कितनी सम संख्याएँ आती हैं?", "args": {}}
+{"tid": "ct_sum_t", "task": "counting", "program": "count_sum", "role": "test", "text": "एक कमरे में {a} कुर्सियाँ और {b} मेज़ें हैं। कुल मिलाकर कितनी वस्तुएँ हैं?", "args": {}}
+{"tid": "ct_choose_t", "task": "counting", "program": "count_choose", "role": "test", "text": "{n} उपलब्ध विकल्पों में से {k} विकल्प चुने जाने हैं। बिना क्रम के कितने तरीके संभव हैं?", "args": {}}
+{"tid": "p25_000_cmp_extreme_train", "task": "comparison", "program": "cmp_extreme", "role": "train", "text": "{a} का मान {va} है और {b} का मान {vb} है। बड़ा मान किसका है?", "args": {"target": "max"}}
+{"tid": "p25_001_cmp_extreme_val", "task": "comparison", "program": "cmp_extreme", "role": "val", "text": "{a} की संख्या {va} है, जबकि {b} की संख्या {vb} है। किसकी संख्या कम है?", "args": {"target": "min"}}
+{"tid": "p25_002_cmp_extreme_test", "task": "comparison", "program": "cmp_extreme", "role": "test", "text": "{a} और {b} में से किसका मान अधिक है? मान {va} और {vb} हैं।", "args": {"target": "max"}}
+{"tid": "p25_003_trans_extreme_train", "task": "transitive", "program": "trans_extreme", "role": "train", "text": "{p1} के अंक {p2} से अधिक हैं और {p2} के अंक {p3} से अधिक हैं। सबसे अधिक अंक किसके हैं?", "args": {"relation": "gt", "target": "max"}}
+{"tid": "p25_004_trans_extreme_val", "task": "transitive", "program": "trans_extreme", "role": "val", "text": "{p1} की उम्र {p2} से कम है और {p2} की उम्र {p3} से कम है। सबसे कम उम्र किसकी है?", "args": {"relation": "lt", "target": "min"}}
+{"tid": "p25_005_trans_extreme_test", "task": "transitive", "program": "trans_extreme", "role": "test", "text": "{p1} का वजन {p2} से अधिक है और {p2} का वजन {p3} से अधिक है। सबसे कम वजन किसका है?", "args": {"relation": "gt", "target": "min"}}
+{"tid": "p25_006_trans_yesno_train", "task": "transitive", "program": "trans_yesno", "role": "train", "text": "{p1} का मान {p2} से अधिक है और {p2} का मान {p3} से अधिक है। क्या {p1} का मान {p3} से अधिक है?", "args": {"relation": "gt", "query": "p1_gt_p3"}}
+{"tid": "p25_007_trans_yesno_val", "task": "transitive", "program": "trans_yesno", "role": "val", "text": "{p1} की कीमत {p2} से कम है और {p2} की कीमत {p3} से कम है। क्या {p3} की कीमत {p1} से अधिक है?", "args": {"relation": "lt", "query": "p3_gt_p1"}}
+{"tid": "p25_008_trans_yesno_test", "task": "transitive", "program": "trans_yesno", "role": "test", "text": "{p1} का मान {p2} से अधिक है और {p2} का मान {p3} से अधिक है। क्या {p3} का मान {p1} से अधिक है?", "args": {"relation": "gt", "query": "p3_gt_p1"}}
+{"tid": "p25_009_arith_add_train", "task": "arithmetic", "program": "arith_add", "role": "train", "text": "{x} और {y} को जोड़ने पर कितना मिलेगा?", "args": {}}
+{"tid": "p25_010_arith_add_val", "task": "arithmetic", "program": "arith_add", "role": "val", "text": "{a} के पास {x} {o1} हैं। उसे {y} और मिले। अब कितने {o1} हैं?", "args": {}}
+{"tid": "p25_011_arith_add_test", "task": "arithmetic", "program": "arith_add", "role": "test", "text": "पहले {x} {o1} थे और {y} और मिल गए। कुल कितने हुए?", "args": {}}
+{"tid": "p25_012_arith_sub_train", "task": "arithmetic", "program": "arith_sub", "role": "train", "text": "{x} में से {y} घटाने पर क्या मिलेगा?", "args": {}}
+{"tid": "p25_013_arith_sub_val", "task": "arithmetic", "program": "arith_sub", "role": "val", "text": "{a} के पास {x} {o1} थे। उसने {y} दे दिए। कितने बचे?", "args": {}}
+{"tid": "p25_014_arith_sub_test", "task": "arithmetic", "program": "arith_sub", "role": "test", "text": "एक डिब्बे में {x} चीजें थीं और {y} निकाल दी गईं। कितनी बचीं?", "args": {}}
+{"tid": "p25_015_arith_mul_train", "task": "arithmetic", "program": "arith_mul", "role": "train", "text": "{x} समूहों में हर समूह में {y} {o1} हैं। कुल कितने {o1} हैं?", "args": {}}
+{"tid": "p25_016_arith_mul_val", "task": "arithmetic", "program": "arith_mul", "role": "val", "text": "{x} पैकेट हैं और हर पैकेट में {y} {o1} हैं। कुल कितने होंगे?", "args": {}}
+{"tid": "p25_017_arith_mul_test", "task": "arithmetic", "program": "arith_mul", "role": "test", "text": "{x} को {y} से गुणा करने पर क्या परिणाम आएगा?", "args": {}}
+{"tid": "p25_018_arith_div_train", "task": "arithmetic", "program": "arith_div", "role": "train", "text": "{x} {o1} को {y} बराबर भागों में बाँटें। हर भाग में कितने होंगे?", "args": {}}
+{"tid": "p25_019_arith_div_val", "task": "arithmetic", "program": "arith_div", "role": "val", "text": "{x} वस्तुओं को {y} लोगों में बराबर बाँटा गया। हर व्यक्ति को कितनी मिलीं?", "args": {}}
+{"tid": "p25_020_arith_div_test", "task": "arithmetic", "program": "arith_div", "role": "test", "text": "{x} को {y} से भाग देने पर भागफल क्या होगा?", "args": {}}
+{"tid": "p25_021_pct_of_train", "task": "percentage", "program": "pct_of", "role": "train", "text": "{x} का {p}% कितना है?", "args": {}}
+{"tid": "p25_022_pct_of_val", "task": "percentage", "program": "pct_of", "role": "val", "text": "{x} में से {p}% भाग कितना होगा?", "args": {}}
+{"tid": "p25_023_pct_of_test", "task": "percentage", "program": "pct_of", "role": "test", "text": "कुल {x} का {p}% निकालने पर कितना मिलेगा?", "args": {}}
+{"tid": "p25_024_pct_discount_train", "task": "percentage", "program": "pct_discount", "role": "train", "text": "{x} रुपये की वस्तु पर {p}% छूट है। नई कीमत कितनी होगी?", "args": {}}
+{"tid": "p25_025_pct_discount_val", "task": "percentage", "program": "pct_discount", "role": "val", "text": "मूल कीमत {x} रुपये है और {p}% कम करनी है। कीमत क्या होगी?", "args": {}}
+{"tid": "p25_026_pct_discount_test", "task": "percentage", "program": "pct_discount", "role": "test", "text": "{o1} की कीमत {x} रुपये है। {p}% छूट के बाद कितना देना होगा?", "args": {}}
+{"tid": "p25_027_pct_increase_train", "task": "percentage", "program": "pct_increase", "role": "train", "text": "{x} में {p}% वृद्धि करने पर नया मान क्या होगा?", "args": {}}
+{"tid": "p25_028_pct_increase_val", "task": "percentage", "program": "pct_increase", "role": "val", "text": "किसी वस्तु का मूल्य {x} रुपये है। {p}% बढ़ने के बाद मूल्य कितना है?", "args": {}}
+{"tid": "p25_029_pct_increase_test", "task": "percentage", "program": "pct_increase", "role": "test", "text": "{x} को {p}% बढ़ाने पर नया मान कितना होगा?", "args": {}}
+{"tid": "p25_030_ratio_other_train", "task": "ratio", "program": "ratio_other", "role": "train", "text": "दो राशियों का अनुपात {m}:{n} है। पहली राशि {x} है। दूसरी कितनी है?", "args": {}}
+{"tid": "p25_031_ratio_other_val", "task": "ratio", "program": "ratio_other", "role": "val", "text": "{a} और {b} की संख्या का अनुपात {m}:{n} है। {a} के पास {x} हैं। {b} के पास कितने हैं?", "args": {}}
+{"tid": "p25_032_ratio_other_test", "task": "ratio", "program": "ratio_other", "role": "test", "text": "{m}:{n} के अनुपात में पहली राशि {x} है। दूसरी राशि ज्ञात करें.", "args": {}}
+{"tid": "p25_033_ratio_part_train", "task": "ratio", "program": "ratio_part", "role": "train", "text": "कुल {t} को {m}:{n} में बाँटा गया है। पहला भाग कितना है?", "args": {}}
+{"tid": "p25_034_ratio_part_val", "task": "ratio", "program": "ratio_part", "role": "val", "text": "{t} रुपये को {m}:{n} में बाँटने पर पहला हिस्सा कितना होगा?", "args": {}}
+{"tid": "p25_035_ratio_part_test", "task": "ratio", "program": "ratio_part", "role": "test", "text": "दो भागों का अनुपात {m}:{n} है और कुल {t} है। पहला भाग कितना है?", "args": {}}
+{"tid": "p25_036_alg_add_inv_train", "task": "algebra", "program": "alg_add_inv", "role": "train", "text": "x + {b} = {c} है। x का मान क्या है?", "args": {}}
+{"tid": "p25_037_alg_add_inv_val", "task": "algebra", "program": "alg_add_inv", "role": "val", "text": "किसी संख्या में {b} जोड़ने पर {c} मिलता है। संख्या क्या है?", "args": {}}
+{"tid": "p25_038_alg_add_inv_test", "task": "algebra", "program": "alg_add_inv", "role": "test", "text": "{b} जोड़ने के बाद परिणाम {c} है। मूल संख्या कितनी थी?", "args": {}}
+{"tid": "p25_039_alg_sub_inv_train", "task": "algebra", "program": "alg_sub_inv", "role": "train", "text": "x − {b} = {c} है। x कितना है?", "args": {}}
+{"tid": "p25_040_alg_sub_inv_val", "task": "algebra", "program": "alg_sub_inv", "role": "val", "text": "किसी संख्या में से {b} घटाने पर {c} मिलता है। संख्या क्या है?", "args": {}}
+{"tid": "p25_041_alg_sub_inv_test", "task": "algebra", "program": "alg_sub_inv", "role": "test", "text": "{b} घटाने के बाद {c} बचता है। शुरू की संख्या क्या थी?", "args": {}}
+{"tid": "p25_042_alg_mul_inv_train", "task": "algebra", "program": "alg_mul_inv", "role": "train", "text": "{m}x = {c} है। x कितना है?", "args": {}}
+{"tid": "p25_043_alg_mul_inv_val", "task": "algebra", "program": "alg_mul_inv", "role": "val", "text": "किसी संख्या का {m} गुना {c} है। संख्या क्या है?", "args": {}}
+{"tid": "p25_044_alg_mul_inv_test", "task": "algebra", "program": "alg_mul_inv", "role": "test", "text": "एक संख्या को {m} से गुणा करने पर {c} मिलता है। संख्या बताइए.", "args": {}}
+{"tid": "p25_045_alg_linear_plus_train", "task": "algebra", "program": "alg_linear_plus", "role": "train", "text": "{m}x + {b} = {c} है। x का मान क्या है?", "args": {}}
+{"tid": "p25_046_alg_linear_plus_val", "task": "algebra", "program": "alg_linear_plus", "role": "val", "text": "किसी संख्या को {m} से गुणा करके {b} जोड़ने पर {c} मिलता है। संख्या क्या है?", "args": {}}
+{"tid": "p25_047_alg_linear_plus_test", "task": "algebra", "program": "alg_linear_plus", "role": "test", "text": "{m} गुना संख्या में {b} जोड़ने पर {c} मिलता है। मूल संख्या क्या है?", "args": {}}
+{"tid": "p25_048_alg_linear_minus_train", "task": "algebra", "program": "alg_linear_minus", "role": "train", "text": "{m}x − {b} = {c} है। x कितना है?", "args": {}}
+{"tid": "p25_049_alg_linear_minus_val", "task": "algebra", "program": "alg_linear_minus", "role": "val", "text": "किसी संख्या को {m} से गुणा करके {b} घटाने पर {c} मिलता है। संख्या क्या है?", "args": {}}
+{"tid": "p25_050_alg_linear_minus_test", "task": "algebra", "program": "alg_linear_minus", "role": "test", "text": "{m} गुना संख्या में से {b} घटाने पर {c} मिलता है। मूल संख्या बताइए.", "args": {}}
+{"tid": "p25_051_sd_distance_train", "task": "speed_distance", "program": "sd_distance", "role": "train", "text": "{v} किलोमीटर प्रति घंटा की गति से {t} घंटे चलने पर कितनी दूरी होगी?", "args": {}}
+{"tid": "p25_052_sd_time_val", "task": "speed_distance", "program": "sd_time", "role": "val", "text": "{d} किलोमीटर दूरी {v} किलोमीटर प्रति घंटा की गति से तय करने में कितना समय लगेगा?", "args": {}}
+{"tid": "p25_053_sd_speed_test", "task": "speed_distance", "program": "sd_speed", "role": "test", "text": "{d} मीटर की दूरी {t} सेकंड में तय की गई। गति कितनी है?", "args": {}}
+{"tid": "p25_054_fma_force_train", "task": "physics_fma", "program": "fma_force", "role": "train", "text": "द्रव्यमान {m} किलोग्राम और त्वरण {a} मीटर प्रति सेकंड वर्ग है। बल कितना है?", "args": {}}
+{"tid": "p25_055_fma_accel_val", "task": "physics_fma", "program": "fma_accel", "role": "val", "text": "{m} किलोग्राम की वस्तु पर {f} न्यूटन बल है। त्वरण कितना होगा?", "args": {}}
+{"tid": "p25_056_fma_mass_test", "task": "physics_fma", "program": "fma_mass", "role": "test", "text": "{f} न्यूटन बल से {a} मीटर प्रति सेकंड वर्ग त्वरण मिलता है। द्रव्यमान कितना है?", "args": {}}
+{"tid": "p25_057_mh_spend_earn_train", "task": "multi_hop", "program": "mh_spend_earn", "role": "train", "text": "{a} के पास {x} रुपये थे। {y} खर्च किए और {z} रुपये मिले। अब कितने रुपये हैं?", "args": {}}
+{"tid": "p25_058_mh_add_then_mul_val", "task": "multi_hop", "program": "mh_add_then_mul", "role": "val", "text": "{x} में पहले {y} जोड़ें और फिर परिणाम को {m} से गुणा करें। उत्तर क्या है?", "args": {}}
+{"tid": "p25_059_mh_spend_earn_test", "task": "multi_hop", "program": "mh_spend_earn", "role": "test", "text": "शुरू में {x} इकाइयाँ थीं। {y} घट गईं और फिर {z} बढ़ गईं। अंतिम संख्या क्या है?", "args": {}}
+{"tid": "p25_060_count_sum_train", "task": "counting", "program": "count_sum", "role": "train", "text": "{a} लड़के और {b} लड़कियाँ हैं। कुल विद्यार्थी कितने हैं?", "args": {}}
+{"tid": "p25_061_count_diff_val", "task": "counting", "program": "count_diff", "role": "val", "text": "एक डिब्बे में {a} और दूसरे में {b} वस्तुएँ हैं। अंतर कितना है?", "args": {}}
+{"tid": "p25_062_count_choose_test", "task": "counting", "program": "count_choose", "role": "test", "text": "{n} वस्तुओं में से {k} चुननी हैं और क्रम मायने नहीं रखता। कितने चयन होंगे?", "args": {}}
