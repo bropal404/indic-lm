@@ -1,1119 +1,205 @@
 {
-  "config": {
-    "seed": 42,
-    "output_root": ".",
-    "digit_script": "ascii",
-    "templates_dir": ".",
-    "languages": {
-      "hi": {
-        "dir": "hindi/reasoning",
-        "name": "Hindi",
-        "template_file": "templates_hi.jsonl"
-      },
-      "ne": {
-        "dir": "nepali/reasoning",
-        "name": "Nepali",
-        "template_file": "templates_ne.jsonl"
-      }
-    },
-    "counts": {
-      "train": 50000,
-      "val": 5000,
-      "test": 5000
-    },
-    "task_weights": {
-      "comparison": 0.07,
-      "transitive": 0.09,
-      "arithmetic": 0.08,
-      "percentage": 0.07,
-      "ratio": 0.06,
-      "algebra": 0.08,
-      "unit_conversion": 0.07,
-      "speed_distance": 0.07,
-      "physics_fma": 0.06,
-      "physics_density": 0.05,
-      "physics_work": 0.05,
-      "multi_hop": 0.09,
-      "logic": 0.06,
-      "common_sense": 0.04,
-      "counting": 0.06
-    },
-    "difficulty_weights": {
-      "train": {
-        "easy": 0.3,
-        "medium": 0.5,
-        "hard": 0.2
-      },
-      "val": {
-        "easy": 0.25,
-        "medium": 0.5,
-        "hard": 0.25
-      },
-      "test": {
-        "easy": 0.15,
-        "medium": 0.45,
-        "hard": 0.4
-      }
-    },
-    "elastic_tasks": [
-      "arithmetic",
-      "algebra",
-      "percentage",
-      "multi_hop",
-      "speed_distance",
-      "unit_conversion",
-      "counting",
-      "ratio"
-    ],
-    "max_sample_attempts": 60,
-    "max_redistribution_rounds": 12
+  "seed": 42,
+  "counts": {
+    "train": 50000,
+    "val": 5000,
+    "test": 5000
   },
+  "hard_probability": {
+    "train": 0.3,
+    "val": 0.4,
+    "test": 0.6
+  },
+  "tasks": [
+    "comparison",
+    "ordering",
+    "transitive",
+    "implication",
+    "negation",
+    "conditional",
+    "analogy",
+    "categorization",
+    "common_sense",
+    "cause_effect",
+    "multi_hop",
+    "counting",
+    "temporal",
+    "spatial",
+    "rule_based"
+  ],
+  "num_tasks": 15,
   "languages": {
     "hi": {
-      "language": "hi",
-      "counts": {
-        "train": 50000,
-        "val": 5000,
-        "test": 5000
-      },
-      "digit_script": "ascii",
-      "template_source": "./templates_hi.jsonl",
-      "template_bank": {
-        "comparison": {
-          "templates": 8,
-          "programs": 1,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 2
-          }
-        },
-        "transitive": {
-          "templates": 12,
-          "programs": 2,
-          "by_role": {
-            "train": 6,
-            "val": 3,
-            "test": 3
-          }
-        },
-        "arithmetic": {
-          "templates": 10,
-          "programs": 4,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 4
-          }
-        },
-        "percentage": {
-          "templates": 9,
-          "programs": 3,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 3
-          }
-        },
-        "ratio": {
-          "templates": 6,
-          "programs": 2,
-          "by_role": {
-            "train": 2,
-            "val": 2,
-            "test": 2
-          }
-        },
-        "algebra": {
-          "templates": 12,
-          "programs": 5,
-          "by_role": {
-            "train": 5,
-            "val": 2,
-            "test": 5
-          }
-        },
-        "unit_conversion": {
-          "templates": 18,
-          "programs": 1,
-          "by_role": {
-            "train": 6,
-            "val": 6,
-            "test": 6
-          }
-        },
-        "speed_distance": {
-          "templates": 8,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 2,
-            "test": 3
-          }
-        },
-        "physics_fma": {
-          "templates": 7,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 1,
-            "test": 3
-          }
-        },
-        "physics_density": {
-          "templates": 7,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 1,
-            "test": 3
-          }
-        },
-        "physics_work": {
-          "templates": 7,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 1,
-            "test": 3
-          }
-        },
-        "multi_hop": {
-          "templates": 9,
-          "programs": 3,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 3
-          }
-        },
-        "logic": {
-          "templates": 13,
-          "programs": 5,
-          "by_role": {
-            "train": 5,
-            "val": 3,
-            "test": 5
-          }
-        },
-        "common_sense": {
-          "templates": 5,
-          "programs": 2,
-          "by_role": {
-            "train": 2,
-            "val": 1,
-            "test": 2
-          }
-        },
-        "counting": {
-          "templates": 10,
-          "programs": 4,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 4
-          }
-        }
-      },
+      "language": "hindi",
+      "seed": 42,
       "splits": {
         "train": {
           "count": 50000,
-          "unique_questions": 50000,
-          "task_counts": {
-            "counting": 4020,
-            "percentage": 4691,
-            "transitive": 4500,
-            "arithmetic": 5361,
-            "speed_distance": 4690,
-            "multi_hop": 6029,
-            "physics_density": 754,
-            "algebra": 5359,
-            "physics_work": 2500,
-            "physics_fma": 3000,
-            "comparison": 3500,
-            "unit_conversion": 1558,
-            "ratio": 4020,
-            "common_sense": 8,
-            "logic": 10
+          "tasks": {
+            "transitive": 10258,
+            "multi_hop": 10260,
+            "comparison": 12611,
+            "ordering": 13006,
+            "counting": 3845,
+            "spatial": 2,
+            "negation": 2,
+            "analogy": 2,
+            "common_sense": 2,
+            "categorization": 2,
+            "temporal": 2,
+            "rule_based": 2,
+            "conditional": 2,
+            "implication": 2,
+            "cause_effect": 2
           },
-          "program_counts": {
-            "count_sum": 1575,
-            "pct_increase": 1366,
-            "pct_discount": 1962,
-            "trans_yesno": 2197,
-            "arith_sub": 1362,
-            "sd_speed": 4316,
-            "pct_of": 1363,
-            "mh_add_then_mul": 2011,
-            "den_density": 254,
-            "alg_linear_minus": 1257,
-            "arith_add": 1366,
-            "trans_extreme": 2303,
-            "mh_spend_earn": 2008,
-            "work_work": 874,
-            "alg_sub_inv": 1311,
-            "count_diff": 2101,
-            "fma_mass": 999,
-            "alg_add_inv": 1131,
-            "arith_div": 1286,
-            "work_power": 806,
-            "alg_mul_inv": 410,
-            "alg_linear_plus": 1250,
-            "fma_accel": 1002,
-            "cmp_extreme": 3500,
-            "unit_convert": 1558,
-            "den_volume": 250,
-            "arith_mul": 1347,
-            "sd_time": 187,
-            "ratio_other": 3849,
-            "work_from_power": 820,
-            "mh_sell_percent": 2010,
-            "sd_distance": 187,
-            "den_mass": 250,
-            "fma_force": 999,
-            "ratio_part": 171,
-            "count_choose": 296,
-            "count_even_below": 48,
-            "cs_choice": 6,
-            "log_affirm_consequent_certain": 2,
-            "log_deny_antecedent": 2,
-            "cs_direction": 2,
-            "log_modus_tollens": 2,
-            "log_modus_ponens": 2,
-            "log_affirm_consequent_possible": 2
+          "difficulty": {
+            "easy": 31010,
+            "hard": 18990
           },
-          "template_counts": {
-            "ct_sum_class": 1575,
-            "pc_inc_salary": 1366,
-            "pc_dec_plain": 860,
-            "tr_yn_false_value": 1103,
-            "ar_sub_box": 1362,
-            "sd_speed_runner": 4316,
-            "pc_of_class": 1363,
-            "mh_add_mul": 2011,
-            "dn_density": 254,
-            "al_linear_minus": 1257,
-            "ar_add_buy": 1366,
-            "pc_disc_shop": 1102,
-            "tr_gt_min_weight": 580,
-            "mh_give_return": 1003,
-            "wk_work": 874,
-            "al_sub_inv": 1311,
-            "ct_diff_balls": 2101,
-            "fm_mass": 999,
-            "al_add_inv": 1131,
-            "ar_div_share": 1286,
-            "wk_power": 806,
-            "al_mul_inv": 410,
-            "al_linear_plus": 1250,
-            "fm_accel": 1002,
-            "cmp_gt_weight": 875,
-            "uconv_f1_min_s": 284,
-            "dn_volume": 250,
-            "ar_mul_rows": 1347,
-            "sd_time_trip": 187,
-            "ra_other_items": 3849,
-            "cmp_gt_height": 875,
-            "wk_from_power": 820,
-            "mh_sell_percent": 2010,
-            "cmp_lt_weight_g": 875,
-            "sd_dist_vehicle": 187,
-            "dn_mass": 250,
-            "uconv_f1_h_min": 96,
-            "uconv_f1_l_ml": 245,
-            "tr_gt_max_weight": 578,
-            "tr_yn_true_value": 1094,
-            "tr_lt_max_price": 575,
-            "cmp_lt_age": 875,
-            "uconv_f1_kg_g": 287,
-            "mh_spend_earn": 1005,
-            "fm_force": 999,
-            "ra_part_mix": 171,
-            "tr_lt_min_height": 570,
-            "uconv_f1_m_cm": 361,
-            "ct_choose": 296,
-            "uconv_f1_km_m": 285,
-            "ct_even": 48,
-            "cs_choice_a": 6,
-            "lg_ac_certain": 2,
-            "lg_da": 2,
-            "cs_dir_a": 2,
-            "lg_mt": 2,
-            "lg_mp": 2,
-            "lg_ac_possible": 2
-          },
-          "difficulty_counts": {
-            "medium": 24898,
-            "hard": 9939,
-            "easy": 15163
-          },
-          "majority_label_share": 0.0222,
-          "distinct_labels": 6229
+          "unique_questions": 50000
         },
         "val": {
           "count": 5000,
-          "unique_questions": 5000,
-          "task_counts": {
-            "algebra": 468,
-            "transitive": 450,
-            "arithmetic": 468,
-            "multi_hop": 527,
-            "physics_density": 250,
-            "physics_work": 250,
-            "counting": 351,
-            "unit_conversion": 410,
-            "physics_fma": 300,
-            "percentage": 410,
-            "ratio": 351,
-            "speed_distance": 410,
-            "comparison": 350,
-            "logic": 3,
-            "common_sense": 2
+          "tasks": {
+            "counting": 748,
+            "multi_hop": 1020,
+            "cause_effect": 2,
+            "comparison": 1036,
+            "transitive": 1103,
+            "ordering": 1073,
+            "analogy": 2,
+            "implication": 2,
+            "negation": 2,
+            "common_sense": 2,
+            "rule_based": 2,
+            "temporal": 2,
+            "spatial": 2,
+            "conditional": 2,
+            "categorization": 2
           },
-          "program_counts": {
-            "alg_linear_plus": 235,
-            "trans_extreme": 237,
-            "arith_add": 234,
-            "mh_add_then_mul": 264,
-            "den_density": 250,
-            "mh_spend_earn": 263,
-            "work_work": 250,
-            "count_sum": 204,
-            "unit_convert": 410,
-            "fma_force": 300,
-            "pct_increase": 211,
-            "alg_add_inv": 233,
-            "ratio_other": 222,
-            "trans_yesno": 213,
-            "sd_distance": 138,
-            "cmp_extreme": 350,
-            "arith_mul": 234,
-            "sd_speed": 272,
-            "pct_of": 199,
-            "count_choose": 147,
-            "ratio_part": 129,
-            "log_modus_ponens": 1,
-            "log_affirm_consequent_possible": 1,
-            "cs_choice": 2,
-            "log_modus_tollens": 1
+          "difficulty": {
+            "easy": 2852,
+            "hard": 2148
           },
-          "template_counts": {
-            "al_linear_plus_v": 235,
-            "tr_lt_min_money": 119,
-            "ar_add_total": 234,
-            "mh_add_mul_v": 264,
-            "dn_density_v": 250,
-            "tr_gt_max_age": 118,
-            "mh_spend_earn_v": 263,
-            "wk_work_v": 250,
-            "ct_sum_shelf": 204,
-            "uconv_f2_l_ml": 69,
-            "uconv_f2_km_m": 72,
-            "fm_force_v": 300,
-            "pc_inc_price": 211,
-            "al_add_inv_v": 233,
-            "ra_other_age": 222,
-            "tr_yn_true_price": 213,
-            "sd_dist_train": 138,
-            "cmp_lt_distance": 175,
-            "ar_mul_packs": 234,
-            "sd_speed_cycle": 272,
-            "pc_of_votes": 199,
-            "uconv_f2_kg_g": 68,
-            "uconv_f2_min_s": 71,
-            "uconv_f2_m_cm": 74,
-            "ct_choose_v": 147,
-            "cmp_gt_price": 175,
-            "ra_part_money": 129,
-            "uconv_f2_h_min": 56,
-            "lg_mp_v": 1,
-            "lg_ac_possible_v": 1,
-            "cs_choice_v": 2,
-            "lg_mt_v": 1
-          },
-          "difficulty_counts": {
-            "easy": 1253,
-            "medium": 2469,
-            "hard": 1278
-          },
-          "majority_label_share": 0.043,
-          "distinct_labels": 1799
+          "unique_questions": 5000
         },
         "test": {
           "count": 5000,
-          "unique_questions": 5000,
-          "task_counts": {
-            "percentage": 413,
-            "counting": 353,
-            "algebra": 471,
-            "logic": 5,
-            "transitive": 450,
-            "arithmetic": 471,
-            "ratio": 332,
-            "physics_density": 250,
-            "comparison": 350,
-            "unit_conversion": 411,
-            "physics_fma": 300,
-            "multi_hop": 529,
-            "speed_distance": 412,
-            "physics_work": 250,
-            "common_sense": 3
+          "tasks": {
+            "transitive": 1009,
+            "multi_hop": 1050,
+            "comparison": 1008,
+            "ordering": 1084,
+            "counting": 829,
+            "analogy": 2,
+            "temporal": 2,
+            "conditional": 2,
+            "rule_based": 2,
+            "implication": 2,
+            "common_sense": 2,
+            "cause_effect": 2,
+            "categorization": 2,
+            "spatial": 2,
+            "negation": 2
           },
-          "program_counts": {
-            "pct_discount": 143,
-            "count_even_below": 46,
-            "alg_linear_minus": 98,
-            "count_sum": 107,
-            "log_affirm_consequent_possible": 1,
-            "trans_extreme": 238,
-            "arith_mul": 119,
-            "ratio_other": 167,
-            "den_volume": 85,
-            "alg_linear_plus": 96,
-            "pct_increase": 135,
-            "cmp_extreme": 350,
-            "unit_convert": 411,
-            "alg_sub_inv": 95,
-            "fma_mass": 101,
-            "count_diff": 110,
-            "fma_force": 97,
-            "alg_add_inv": 96,
-            "den_density": 85,
-            "mh_add_then_mul": 177,
-            "pct_of": 135,
-            "sd_speed": 182,
-            "fma_accel": 102,
-            "alg_mul_inv": 86,
-            "work_power": 84,
-            "mh_spend_earn": 176,
-            "arith_sub": 118,
-            "ratio_part": 165,
-            "mh_sell_percent": 176,
-            "sd_distance": 116,
-            "trans_yesno": 212,
-            "arith_add": 120,
-            "arith_div": 114,
-            "work_work": 82,
-            "sd_time": 114,
-            "work_from_power": 84,
-            "count_choose": 90,
-            "den_mass": 80,
-            "cs_direction": 1,
-            "log_affirm_consequent_certain": 1,
-            "cs_choice": 2,
-            "log_modus_tollens": 1,
-            "log_deny_antecedent": 1,
-            "log_modus_ponens": 1
+          "difficulty": {
+            "easy": 1919,
+            "hard": 3081
           },
-          "template_counts": {
-            "pc_disc_sale": 143,
-            "ct_even_t": 46,
-            "al_linear_minus_t": 98,
-            "ct_sum_t": 107,
-            "lg_ac_possible_t": 1,
-            "tr_lt_max_load": 115,
-            "ar_mul_plain": 119,
-            "ra_other_weight": 167,
-            "dn_volume_t": 85,
-            "al_linear_plus_t": 96,
-            "pc_inc_rent": 135,
-            "cmp_lt_serial": 175,
-            "uconv_f3_km_m": 70,
-            "al_sub_inv_t": 95,
-            "fm_mass_t": 101,
-            "ct_diff_t": 110,
-            "fm_force_t": 97,
-            "al_add_inv_t": 96,
-            "dn_density_t": 85,
-            "mh_add_mul_t": 177,
-            "pc_of_water": 135,
-            "sd_speed_t": 182,
-            "fm_accel_t": 102,
-            "al_mul_inv_t": 86,
-            "wk_power_t": 84,
-            "mh_spend_earn_t": 176,
-            "ar_sub_diff": 118,
-            "tr_gt_min_score": 123,
-            "ra_part_class": 165,
-            "mh_sell_percent_t": 176,
-            "sd_dist_bus": 116,
-            "tr_yn_false_price": 212,
-            "ar_add_plain": 120,
-            "ar_div_plain": 114,
-            "wk_work_t": 82,
-            "sd_time_walk": 114,
-            "uconv_f3_min_s": 71,
-            "wk_from_power_t": 84,
-            "uconv_f3_l_ml": 71,
-            "ct_choose_t": 90,
-            "cmp_gt_serial": 175,
-            "uconv_f3_m_cm": 71,
-            "dn_mass_t": 80,
-            "uconv_f3_h_min": 57,
-            "uconv_f3_kg_g": 71,
-            "cs_dir_t": 1,
-            "lg_ac_certain_t": 1,
-            "cs_choice_t": 2,
-            "lg_mt_t": 1,
-            "lg_da_t": 1,
-            "lg_mp_t": 1
-          },
-          "difficulty_counts": {
-            "hard": 1991,
-            "medium": 2250,
-            "easy": 759
-          },
-          "majority_label_share": 0.043,
-          "distinct_labels": 1704
+          "unique_questions": 5000
         }
-      },
-      "quota_shortfalls_redistributed": {
-        "train": {
-          "unit_conversion": 1988,
-          "physics_density": 1746,
-          "logic": 2990,
-          "common_sense": 1992
-        },
-        "val": {
-          "logic": 297,
-          "common_sense": 198
-        },
-        "test": {
-          "logic": 295,
-          "common_sense": 197
-        }
-      },
-      "ground_truth": "all labels computed in Python; no model-generated labels",
-      "leakage_controls": [
-        "template wordings partitioned by role (train/val/test)",
-        "entity pools partitioned disjointly by split",
-        "logic rules and common-sense scenarios partitioned by split",
-        "exact-question uniqueness enforced within and across splits",
-        "every semantic program present in both train and test"
-      ]
+      }
     },
     "ne": {
-      "language": "ne",
-      "counts": {
-        "train": 50000,
-        "val": 5000,
-        "test": 5000
-      },
-      "digit_script": "ascii",
-      "template_source": "./templates_ne.jsonl",
-      "template_bank": {
-        "comparison": {
-          "templates": 8,
-          "programs": 1,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 2
-          }
-        },
-        "transitive": {
-          "templates": 12,
-          "programs": 2,
-          "by_role": {
-            "train": 6,
-            "val": 3,
-            "test": 3
-          }
-        },
-        "arithmetic": {
-          "templates": 10,
-          "programs": 4,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 4
-          }
-        },
-        "percentage": {
-          "templates": 9,
-          "programs": 3,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 3
-          }
-        },
-        "ratio": {
-          "templates": 6,
-          "programs": 2,
-          "by_role": {
-            "train": 2,
-            "val": 2,
-            "test": 2
-          }
-        },
-        "algebra": {
-          "templates": 12,
-          "programs": 5,
-          "by_role": {
-            "train": 5,
-            "val": 2,
-            "test": 5
-          }
-        },
-        "unit_conversion": {
-          "templates": 18,
-          "programs": 1,
-          "by_role": {
-            "train": 6,
-            "val": 6,
-            "test": 6
-          }
-        },
-        "speed_distance": {
-          "templates": 8,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 2,
-            "test": 3
-          }
-        },
-        "physics_fma": {
-          "templates": 7,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 1,
-            "test": 3
-          }
-        },
-        "physics_density": {
-          "templates": 7,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 1,
-            "test": 3
-          }
-        },
-        "physics_work": {
-          "templates": 7,
-          "programs": 3,
-          "by_role": {
-            "train": 3,
-            "val": 1,
-            "test": 3
-          }
-        },
-        "multi_hop": {
-          "templates": 9,
-          "programs": 3,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 3
-          }
-        },
-        "logic": {
-          "templates": 13,
-          "programs": 5,
-          "by_role": {
-            "train": 5,
-            "val": 3,
-            "test": 5
-          }
-        },
-        "common_sense": {
-          "templates": 5,
-          "programs": 2,
-          "by_role": {
-            "train": 2,
-            "val": 1,
-            "test": 2
-          }
-        },
-        "counting": {
-          "templates": 10,
-          "programs": 4,
-          "by_role": {
-            "train": 4,
-            "val": 2,
-            "test": 4
-          }
-        }
-      },
+      "language": "nepali",
+      "seed": 43,
       "splits": {
         "train": {
           "count": 50000,
-          "unique_questions": 50000,
-          "task_counts": {
-            "physics_work": 2500,
-            "arithmetic": 5358,
-            "ratio": 4018,
-            "algebra": 5358,
-            "percentage": 4689,
-            "multi_hop": 6027,
-            "comparison": 3500,
-            "counting": 4018,
-            "speed_distance": 4687,
-            "physics_fma": 3000,
-            "physics_density": 766,
-            "transitive": 4500,
-            "unit_conversion": 1561,
-            "common_sense": 8,
-            "logic": 10
+          "tasks": {
+            "ordering": 12826,
+            "multi_hop": 10250,
+            "comparison": 12742,
+            "transitive": 10325,
+            "counting": 3837,
+            "conditional": 2,
+            "common_sense": 2,
+            "rule_based": 2,
+            "categorization": 2,
+            "spatial": 2,
+            "negation": 2,
+            "temporal": 2,
+            "implication": 2,
+            "analogy": 2,
+            "cause_effect": 2
           },
-          "program_counts": {
-            "work_work": 872,
-            "arith_div": 1290,
-            "ratio_other": 3847,
-            "arith_sub": 1359,
-            "alg_sub_inv": 1322,
-            "arith_mul": 1345,
-            "pct_increase": 1345,
-            "mh_spend_earn": 2008,
-            "cmp_extreme": 3500,
-            "alg_linear_minus": 1250,
-            "count_diff": 2114,
-            "mh_sell_percent": 2010,
-            "sd_speed": 4313,
-            "alg_linear_plus": 1263,
-            "count_choose": 292,
-            "fma_mass": 1014,
-            "pct_of": 1351,
-            "den_mass": 254,
-            "trans_yesno": 2180,
-            "work_from_power": 825,
-            "trans_extreme": 2320,
-            "den_volume": 260,
-            "fma_force": 985,
-            "unit_convert": 1561,
-            "alg_add_inv": 1115,
-            "work_power": 803,
-            "fma_accel": 1001,
-            "pct_discount": 1993,
-            "ratio_part": 171,
-            "count_sum": 1564,
-            "mh_add_then_mul": 2009,
-            "alg_mul_inv": 408,
-            "arith_add": 1364,
-            "sd_time": 187,
-            "sd_distance": 187,
-            "den_density": 252,
-            "count_even_below": 48,
-            "cs_choice": 6,
-            "log_modus_ponens": 2,
-            "log_deny_antecedent": 2,
-            "cs_direction": 2,
-            "log_modus_tollens": 2,
-            "log_affirm_consequent_certain": 2,
-            "log_affirm_consequent_possible": 2
+          "difficulty": {
+            "easy": 31166,
+            "hard": 18834
           },
-          "template_counts": {
-            "wk_work": 872,
-            "ar_div_share": 1290,
-            "ra_other_items": 3847,
-            "ar_sub_box": 1359,
-            "al_sub_inv": 1322,
-            "ar_mul_rows": 1345,
-            "pc_inc_salary": 1345,
-            "mh_give_return": 1003,
-            "cmp_lt_age": 875,
-            "al_linear_minus": 1250,
-            "ct_diff_balls": 2114,
-            "mh_sell_percent": 2010,
-            "sd_speed_runner": 4313,
-            "al_linear_plus": 1263,
-            "ct_choose": 292,
-            "cmp_gt_height": 875,
-            "fm_mass": 1014,
-            "pc_of_class": 1351,
-            "dn_mass": 254,
-            "tr_yn_false_value": 1083,
-            "cmp_gt_weight": 875,
-            "wk_from_power": 825,
-            "tr_gt_min_weight": 580,
-            "dn_volume": 260,
-            "fm_force": 985,
-            "uconv_f1_kg_g": 285,
-            "al_add_inv": 1115,
-            "wk_power": 803,
-            "uconv_f1_km_m": 280,
-            "tr_yn_true_value": 1097,
-            "fm_accel": 1001,
-            "tr_lt_max_price": 582,
-            "pc_dec_plain": 870,
-            "ra_part_mix": 171,
-            "tr_lt_min_height": 578,
-            "pc_disc_shop": 1123,
-            "ct_sum_class": 1564,
-            "cmp_lt_weight_g": 875,
-            "mh_add_mul": 2009,
-            "mh_spend_earn": 1005,
-            "al_mul_inv": 408,
-            "uconv_f1_l_ml": 249,
-            "ar_add_buy": 1364,
-            "sd_time_trip": 187,
-            "sd_dist_vehicle": 187,
-            "tr_gt_max_weight": 580,
-            "dn_density": 252,
-            "uconv_f1_h_min": 96,
-            "uconv_f1_min_s": 289,
-            "uconv_f1_m_cm": 362,
-            "ct_even": 48,
-            "cs_choice_a": 6,
-            "lg_mp": 2,
-            "lg_da": 2,
-            "cs_dir_a": 2,
-            "lg_mt": 2,
-            "lg_ac_certain": 2,
-            "lg_ac_possible": 2
-          },
-          "difficulty_counts": {
-            "hard": 10040,
-            "medium": 25031,
-            "easy": 14929
-          },
-          "majority_label_share": 0.022,
-          "distinct_labels": 6284
+          "unique_questions": 50000
         },
         "val": {
           "count": 5000,
-          "unique_questions": 5000,
-          "task_counts": {
-            "physics_density": 250,
-            "percentage": 410,
-            "multi_hop": 527,
-            "counting": 351,
-            "physics_work": 250,
-            "arithmetic": 468,
-            "physics_fma": 300,
-            "ratio": 351,
-            "comparison": 350,
-            "transitive": 450,
-            "algebra": 468,
-            "unit_conversion": 410,
-            "speed_distance": 410,
-            "logic": 3,
-            "common_sense": 2
+          "tasks": {
+            "transitive": 1055,
+            "comparison": 1085,
+            "counting": 712,
+            "ordering": 1078,
+            "multi_hop": 1050,
+            "temporal": 2,
+            "rule_based": 2,
+            "negation": 2,
+            "analogy": 2,
+            "conditional": 2,
+            "spatial": 2,
+            "implication": 2,
+            "common_sense": 2,
+            "cause_effect": 2,
+            "categorization": 2
           },
-          "program_counts": {
-            "den_density": 250,
-            "pct_of": 200,
-            "mh_spend_earn": 263,
-            "count_choose": 145,
-            "count_sum": 206,
-            "work_work": 250,
-            "arith_add": 236,
-            "fma_force": 300,
-            "pct_increase": 210,
-            "ratio_part": 128,
-            "arith_mul": 232,
-            "cmp_extreme": 350,
-            "trans_yesno": 209,
-            "alg_add_inv": 234,
-            "unit_convert": 410,
-            "mh_add_then_mul": 264,
-            "sd_distance": 138,
-            "trans_extreme": 241,
-            "ratio_other": 223,
-            "alg_linear_plus": 234,
-            "sd_speed": 272,
-            "log_modus_tollens": 1,
-            "log_affirm_consequent_possible": 1,
-            "cs_choice": 2,
-            "log_modus_ponens": 1
+          "difficulty": {
+            "easy": 2917,
+            "hard": 2083
           },
-          "template_counts": {
-            "dn_density_v": 250,
-            "pc_of_votes": 200,
-            "mh_spend_earn_v": 263,
-            "ct_choose_v": 145,
-            "ct_sum_shelf": 206,
-            "wk_work_v": 250,
-            "ar_add_total": 236,
-            "fm_force_v": 300,
-            "pc_inc_price": 210,
-            "ra_part_money": 128,
-            "ar_mul_packs": 232,
-            "cmp_gt_price": 175,
-            "tr_yn_true_price": 209,
-            "al_add_inv_v": 234,
-            "uconv_f2_m_cm": 71,
-            "mh_add_mul_v": 264,
-            "sd_dist_train": 138,
-            "uconv_f2_kg_g": 73,
-            "cmp_lt_distance": 175,
-            "tr_lt_min_money": 120,
-            "ra_other_age": 223,
-            "al_linear_plus_v": 234,
-            "sd_speed_cycle": 272,
-            "tr_gt_max_age": 121,
-            "uconv_f2_l_ml": 70,
-            "uconv_f2_km_m": 72,
-            "uconv_f2_min_s": 72,
-            "uconv_f2_h_min": 52,
-            "lg_mt_v": 1,
-            "lg_ac_possible_v": 1,
-            "cs_choice_v": 2,
-            "lg_mp_v": 1
-          },
-          "difficulty_counts": {
-            "hard": 1290,
-            "medium": 2512,
-            "easy": 1198
-          },
-          "majority_label_share": 0.0422,
-          "distinct_labels": 1808
+          "unique_questions": 5000
         },
         "test": {
           "count": 5000,
-          "unique_questions": 5000,
-          "task_counts": {
-            "comparison": 350,
-            "speed_distance": 412,
-            "multi_hop": 529,
-            "arithmetic": 471,
-            "counting": 353,
-            "transitive": 450,
-            "physics_fma": 300,
-            "ratio": 331,
-            "algebra": 471,
-            "percentage": 413,
-            "physics_density": 250,
-            "unit_conversion": 412,
-            "physics_work": 250,
-            "common_sense": 3,
-            "logic": 5
+          "tasks": {
+            "transitive": 990,
+            "ordering": 1041,
+            "counting": 849,
+            "comparison": 1070,
+            "multi_hop": 1030,
+            "cause_effect": 2,
+            "analogy": 2,
+            "temporal": 2,
+            "common_sense": 2,
+            "implication": 2,
+            "conditional": 2,
+            "spatial": 2,
+            "categorization": 2,
+            "negation": 2,
+            "rule_based": 2
           },
-          "program_counts": {
-            "cmp_extreme": 350,
-            "sd_speed": 185,
-            "mh_spend_earn": 176,
-            "arith_mul": 116,
-            "arith_sub": 118,
-            "count_sum": 109,
-            "count_diff": 112,
-            "trans_yesno": 212,
-            "fma_force": 102,
-            "trans_extreme": 238,
-            "arith_add": 120,
-            "ratio_other": 165,
-            "alg_linear_plus": 95,
-            "alg_linear_minus": 97,
-            "pct_discount": 142,
-            "den_mass": 85,
-            "unit_convert": 412,
-            "mh_add_then_mul": 177,
-            "sd_distance": 116,
-            "work_work": 83,
-            "mh_sell_percent": 176,
-            "fma_accel": 99,
-            "pct_of": 134,
-            "alg_sub_inv": 96,
-            "alg_add_inv": 98,
-            "fma_mass": 99,
-            "ratio_part": 166,
-            "work_power": 82,
-            "work_from_power": 85,
-            "den_density": 82,
-            "arith_div": 117,
-            "alg_mul_inv": 85,
-            "pct_increase": 137,
-            "cs_choice": 2,
-            "den_volume": 83,
-            "count_even_below": 46,
-            "sd_time": 111,
-            "count_choose": 86,
-            "log_modus_tollens": 1,
-            "cs_direction": 1,
-            "log_affirm_consequent_possible": 1,
-            "log_affirm_consequent_certain": 1,
-            "log_deny_antecedent": 1,
-            "log_modus_ponens": 1
+          "difficulty": {
+            "hard": 3049,
+            "easy": 1951
           },
-          "template_counts": {
-            "cmp_lt_serial": 175,
-            "sd_speed_t": 185,
-            "mh_spend_earn_t": 176,
-            "ar_mul_plain": 116,
-            "ar_sub_diff": 118,
-            "ct_sum_t": 109,
-            "ct_diff_t": 112,
-            "tr_yn_false_price": 212,
-            "fm_force_t": 102,
-            "tr_gt_min_score": 118,
-            "ar_add_plain": 120,
-            "ra_other_weight": 165,
-            "al_linear_plus_t": 95,
-            "al_linear_minus_t": 97,
-            "pc_disc_sale": 142,
-            "dn_mass_t": 85,
-            "uconv_f3_km_m": 72,
-            "mh_add_mul_t": 177,
-            "sd_dist_bus": 116,
-            "uconv_f3_m_cm": 71,
-            "wk_work_t": 83,
-            "mh_sell_percent_t": 176,
-            "fm_accel_t": 99,
-            "pc_of_water": 134,
-            "al_sub_inv_t": 96,
-            "tr_lt_max_load": 120,
-            "al_add_inv_t": 98,
-            "fm_mass_t": 99,
-            "ra_part_class": 166,
-            "wk_power_t": 82,
-            "wk_from_power_t": 85,
-            "dn_density_t": 82,
-            "ar_div_plain": 117,
-            "uconv_f3_l_ml": 74,
-            "al_mul_inv_t": 85,
-            "pc_inc_rent": 137,
-            "cs_choice_t": 2,
-            "dn_volume_t": 83,
-            "uconv_f3_min_s": 73,
-            "uconv_f3_h_min": 53,
-            "uconv_f3_kg_g": 69,
-            "ct_even_t": 46,
-            "cmp_gt_serial": 175,
-            "sd_time_walk": 111,
-            "ct_choose_t": 86,
-            "lg_mt_t": 1,
-            "cs_dir_t": 1,
-            "lg_ac_possible_t": 1,
-            "lg_ac_certain_t": 1,
-            "lg_da_t": 1,
-            "lg_mp_t": 1
-          },
-          "difficulty_counts": {
-            "medium": 2212,
-            "hard": 2056,
-            "easy": 732
-          },
-          "majority_label_share": 0.043,
-          "distinct_labels": 1695
+          "unique_questions": 5000
         }
-      },
-      "quota_shortfalls_redistributed": {
-        "train": {
-          "unit_conversion": 2003,
-          "physics_density": 1734,
-          "logic": 2990,
-          "common_sense": 1992
-        },
-        "val": {
-          "logic": 297,
-          "common_sense": 198
-        },
-        "test": {
-          "logic": 295,
-          "common_sense": 197
-        }
-      },
-      "ground_truth": "all labels computed in Python; no model-generated labels",
-      "leakage_controls": [
-        "template wordings partitioned by role (train/val/test)",
-        "entity pools partitioned disjointly by split",
-        "logic rules and common-sense scenarios partitioned by split",
-        "exact-question uniqueness enforced within and across splits",
-        "every semantic program present in both train and test"
-      ]
+      }
     }
+  },
+  "total_examples": 120000,
+  "total_examples_by_split": {
+    "train": 100000,
+    "val": 10000,
+    "test": 10000
+  },
+  "total_examples_by_language": {
+    "hi": 60000,
+    "ne": 60000
   }
 }
