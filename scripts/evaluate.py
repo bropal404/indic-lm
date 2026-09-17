@@ -36,14 +36,14 @@ GEN_SENTENCES = 30      # hardcoded: sentences used for generation-based metrics
 
 LANG_CONFIG = {
     'hi': {
-        'checkpoint': 'model_final_hindi.pt',
-        'tokenizer':  'hindi/tokenizer/hindi_tokenizer_16000.json',
+        'checkpoint': 'hindi_best.pt',
+        'tokenizer':  'hindi/tokenizer/artifacts_16000/bpe_hi_16000_vocab.json',
         'data_dir':   'hindi/data',
         'eval_dir':   'hindi/eval',
     },
     'ne': {
-        'checkpoint': 'model_final_nepali.pt',
-        'tokenizer':  'nepali/tokenizer/nepali_tokenizer_16000.json',
+        'checkpoint': 'nepali_best.pt',
+        'tokenizer':  'nepali/tokenizer/artifacts_16000/bpe_ne_16000_vocab.json',
         'data_dir':   'nepali/data',
         'eval_dir':   'nepali/eval',
     },
