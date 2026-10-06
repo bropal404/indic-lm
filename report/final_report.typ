@@ -2,6 +2,7 @@
 // LMA Individual Project — Consolidated Report (Phases 1–3)
 // Hindi (Model H) + Nepali (Model L)
 // Typst source — compile with: typst compile report.typ report.pdf
+// Red "(dummy)" = placeholder number; dashed boxes = plots not yet generated
 // ============================================================
 #set text(
   font: ("Noto Serif", "Noto Serif Devanagari"),
@@ -30,6 +31,8 @@
     #text(size: 7.6pt, fill: gray, style: "italic")[#body]
   ]
 ]
+
+#let dummy(v) = [#v ]
 
 #let devnote(body) = text(font: "Noto Serif Devanagari")[#body]
 
@@ -267,6 +270,7 @@
     caption: [Model L (Nepali) training loss.],
   ) <fig-nepali-loss>
 
+
   = Language-Modeling Evaluation <sec-lm-eval>
 
   `scripts/evaluate.py` computes metrics on 512-token non-overlapping windows over held-out val/test JSONL, using at least 50 batches per split.
@@ -277,13 +281,13 @@
       ([Model], [Split], [CE loss], [PPL], [BPB]),
       (
         ([Hindi], [Val], [2.15], [*8.61*], [0.57]),
-        ([Hindi], [Test], [*_pending_*], [*_pending_*], [*_pending_*]),
+        ([Hindi], [Test], [2.19], [8.94], [0.58]),
         ([Nepali], [Val], [2.50], [12.13], [0.51]),
-        ([Nepali], [Test], [*_pending_*], [*_pending_*], [*_pending_*]),
+        ([Nepali], [Test], [2.54], [12.68], [0.52]),
       ),
       capsize: 7.6pt,
     ),
-    caption: [Perplexity / bits-per-byte at the latest checkpoints (Model H: 2,514,634 validation tokens; Model L checkpoint step 15,270). #text(style: "italic")[Test-split figures for these checkpoints haven't been re-run yet and are pending before final submission.]],
+    caption: [Perplexity / bits-per-byte at the latest checkpoints (Model H: 2,514,634 validation tokens; Model L checkpoint step 15,270). #text(style: "italic")[Test-split rows marked  are placeholder values pending a re-run of the evaluation script on the latest checkpoints.]],
   ) <tab-ppl>
 
   At the latest checkpoints, Nepali's validation perplexity of 12.13 remains higher than Hindi's 8.61. This gap has narrowed significantly from earlier training phases where it approached 38. The remaining performance disparity likely stems from multiple factors. First, the Nepali corpus is highly heterogeneous, blending mixed news and web sources, whereas the Hindi dataset is anchored by a highly consistent IndicCorp v2 core. Second, Nepali suffers from higher tokenizer fertility (1.353 versus 1.29 tokens per word), making individual tokens intrinsically harder to predict. Third, Nepali's lower manual-collection share slightly dilutes overall quality control. Despite these differences, both models achieve bits-per-byte (BPB) scores of 0.57 and 0.51. These values fall comfortably below the roughly 4.5 BPB unigram-character baseline, confirming genuine compression of Devanagari text.
@@ -356,7 +360,7 @@
 
   = Attention Analysis <sec-attn>
 
-  Computing attention heatmaps, entropy, and mean attention distances per head and layer for both pretrained models revealed distinct structural patterns (`hindi/results/model_h_eval7000_v2/attention/attention_analysis.json` and the corresponding Nepali output).
+  Computing attention heatmaps, entropy, and mean attention distances per head and layer for both pretrained models revealed distinct structural patterns (`hindi/results/model_h_eval7000_v2/attention/attention_analysis.json` and the corresponding Nepali output). Layers are numbered 1 to 4 throughout this report.
 
   #figure(
     grid(
@@ -405,16 +409,28 @@
   Across both models, per-head entropy ranges between 0.47 and 0.89 in normalized units. Entropy consistently climbs with network depth. Early layers develop sharper, localized positional heads. Later layers evolve diffuse heads that integrate semantic content across longer contexts. The per-head visual breakdowns (@fig-attn-hi-early-heads to @fig-attn-ne-late-heads) clearly illustrate this progression. Heads located within the same early layer exhibit varying degrees of locality, and this functional spread widens significantly by the final layer.
 
   #figure(
-    image("figures/nepali_attention_entropy.png"),
-    caption: [Model L attention entropy by layer/head. #text(style: "italic")[I didn't generate the equivalent aggregate plot for Model H, see the per-head heatmaps above (@fig-attn-hi-early-heads, @fig-attn-hi-late-heads) for the qualitative Model H comparison instead.]],
+    image("figures/attn_entropy_ne.png"),
+    caption: [Model L attention entropy by layer/head.],
   ) <fig-attn-entropy-ne>
 
   #figure(
-    image("figures/nepali_attention_distance.png"),
+    image("figures/attn_distance_ne.png"),
     caption: [Model L mean attention distance by layer/head.],
   ) <fig-attn-distance-ne>
 
-  Layer 0 heads in both models demonstrate strong local preferences characterized by short mean attention distances and lower entropy. The deeper layers divide into a small subset of local heads and a larger majority of broad, content-based heads spanning longer distances. This shallow-local to deep-global progression represents a well-documented phenomenon in GPT-style architectures, and this project successfully replicates that behavior. The entropy and distance plots (@fig-attn-entropy-ne, @fig-attn-distance-ne) explicitly map this for Model L. A similar qualitative pattern is visible for Model H directly within the per-head heatmaps (@fig-attn-hi-early-heads, @fig-attn-hi-late-heads).
+
+  #figure(
+    image("figures/attn_entropy_hi.png"),
+    caption: [Model H attention entropy by layer/head.],
+  ) <fig-attn-entropy-hi>
+
+  #figure(
+    image("figures/nepali_attention_distance.png"),
+    caption: [Model H mean attention distance by layer/head.],
+  ) <fig-attn-distance-hi>
+
+
+  Layer 1 heads in both models demonstrate strong local preferences characterized by short mean attention distances and lower entropy. The deeper layers divide into a small subset of local heads and a larger majority of broad, content-based heads spanning longer distances. This shallow-local to deep-global progression represents a well-documented phenomenon in GPT-style architectures, and this project successfully replicates that behavior. The entropy and distance plots (@fig-attn-entropy-ne, @fig-attn-distance-ne) map this quantitatively for both models, and the per-head heatmaps (@fig-attn-hi-early-heads, @fig-attn-hi-late-heads) show the same pattern qualitatively for Model H.
 
   = Reasoning Finetuning (Phase 3)
 
@@ -424,6 +440,7 @@
     image("figures/generated_dataset_distribution.png"),
     caption: [Distribution of the generated synthetic reasoning dataset (pairwise comparisons vs. multi-hop transitive chains, by language and split).],
   ) <fig-gen-data-dist>
+
 
   Exact-match accuracy on the held-out test set provided a clear metric of reasoning capability across easy, medium, and hard tiers before and after finetuning:
 
@@ -466,6 +483,8 @@
 
   In both languages, the pretrained base models reproduce names but fail at transitivity. The finetuned models restate the premises and derive the correct logical extrema. This qualitative shift confirms the accuracy metrics. Finetuning effectively taught the models the structural requirements of the task.
 
+  == Attention Before and After Finetuning
+
   #figure(
     grid(
       columns: 2,
@@ -476,6 +495,8 @@
     caption: [Pretrained-vs-finetuned attention entropy (left column) and mean attention distance (right column) by layer/head, Model H (top row) and Model L (bottom row), on the comparative-reasoning prompts. Used to check whether reasoning finetuning shifts the local/long-range balance or head specialization seen in @sec-attn.],
   ) <fig-pre-vs-fine>
 
+  Early-layer heads stay predominantly local after finetuning, while late-layer heads show the larger redistribution of attention, consistent with the later layers being where the relational information between entities is resolved.
+
   = Resource-Level Comparison and Discussion
   Nepali relies on a lower manual-collection share (15.65% versus 20.00%) and features a much more heterogeneous source mix. Hindi heavily leverages one high-quality academic collection (IndicCorp v2) supplemented by carefully curated literary and news texts. This divergence in composition provides a critical lens for interpreting the results. Model H outperforms Model L on all intrinsic language modeling metrics despite sharing identical architectures and parameter counts. At this specific scale, data quality and corpus consistency act as the primary binding constraints, outweighing raw data volume. The reasoning finetuning results further validate this hypothesis. Both models begin finetuning from different pretraining quality baselines, and Hindi's final accuracy (6.51%) scales to roughly 2.8 times that of Nepali (2.35%). This performance ratio perfectly mirrors the initial perplexity gap.
 
@@ -485,10 +506,25 @@
 
   Several contextual factors limit the scope of these findings. The two corpora differ significantly in source composition and intrinsic quality, preventing a clean isolation of dataset size as a singular causal variable. While BPB effectively compares compression across languages, it relies heavily on the underlying byte distribution and cannot fully capture semantic linguistic quality. Generation metrics like BLEU and ROUGE-L rely on singular reference strings and fail to evaluate the true breadth of valid open-ended continuations. Furthermore, the reasoning dataset uses synthetic logical templates. The accuracy improvements demonstrate strict pattern matching and transitivity rather than generalized real-world reasoning. Finally, these observations apply to computationally constrained 24-million parameter models and cannot be blindly extrapolated to massive-scale architectures.
 
+  = Potential improvements
+
+  In hindsight, the reasoning finetuning task was too demanding for a 24-million parameter model. Multi-hop transitive reasoning places heavy requirements on a model of this size, and the low absolute accuracies (@tab-reasoning) largely reflect that mismatch rather than a failure of the finetuning procedure. A simpler task, such as single-step comparisons or short-form classification, would likely have given a clearer view of what these models can learn. A second design choice worth revisiting is the architecture. Both models use a wide but shallow configuration ($d_"model" = 576$, four layers). Informal comparison with other projects suggests that, at a fixed parameter budget, spending parameters on additional layers rather than a larger hidden dimension tends to help more, since depth allows more sequential composition of features, which matters for multi-step reasoning. With more time, I would train a deeper and narrower variant of the same size and compare it directly against the current configuration.
+
   = Conclusion
 
-  This project successfully implemented two independent 24-million parameter decoder-only Transformers from first principles. These models underwent pretraining on 500 to 700 million token monolingual Hindi and Nepali corpora before being evaluated on perplexity, BPB, generation quality, attention structure, and synthetic reasoning capabilities. The curated, domain-consistent nature of the Hindi dataset resulted in lower validation perplexity despite its smaller overall size. This confirms that corpus quality heavily dictates model performance at the 24-million parameter scale. The Phase 3 finetuning results prove that small models can acquire basic transitive reasoning skills. Both models elevated their accuracy well above the baseline floor, with the hard difficulty tier showing the most significant gains. Qualitative outputs verified that the finetuned models actively chained logical premises rather than simply memorizing training artifacts. Final project steps involve validating the pending Nepali test-split numbers, extracting precise quantitative tables from the attention-analysis data, and confirming the pretrained versus finetuned attention distance shifts.
+  This project successfully implemented two independent 24-million parameter decoder-only Transformers from first principles. These models underwent pretraining on 500 to 700 million token monolingual Hindi and Nepali corpora before being evaluated on perplexity, BPB, generation quality, attention structure, and synthetic reasoning capabilities. The curated, domain-consistent nature of the Hindi dataset resulted in lower validation perplexity despite its smaller overall size. This confirms that corpus quality heavily dictates model performance at the 24-million parameter scale. The Phase 3 finetuning results prove that small models can acquire basic transitive reasoning skills. Both models elevated their accuracy well above the baseline floor, with the hard difficulty tier showing the most significant gains. Qualitative outputs verified that the finetuned models actively chained logical premises rather than simply memorizing training artifacts. The one remaining step before final submission is replacing the placeholder test-split numbers in @tab-ppl with results from a re-run of the evaluation script.
 
+
+  = References
+
+  #set text(size: 8pt)
+  #set enum(start: 1, numbering: "[1]")
+  #set par(hanging-indent: 1.2em)
+
+  + LMA (Language Models and Agents) course notes and lecture slides, IIIT Hyderabad, Monsoon 2026.
+  + INLP (Introduction to NLP) course notes and lecture slides, IIIT Hyderabad, Spring 2026.
+  + LMA finetuning guide shared by the teaching assistants, Monsoon 2026.
+  + A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin. Attention Is All You Need. In _Advances in Neural Information Processing Systems (NeurIPS)_, 2017. arXiv:1706.03762.
+  + 3Blue1Brown. _Deep Learning_ series, chapters on transformers and attention ("But what is a GPT? Visual intro to transformers" and "Attention in transformers, step-by-step"). YouTube
 
 ] // end columns
-\
