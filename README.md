@@ -1,11 +1,24 @@
 # Language Models and Agents (LMA) Individual Project
 
-**Gopal Kataria, 2023112006**
+**Gopal Kataria**
 
-This repository contains the code and data pipelines for training two decoder-only Transformer language models from scratch:
+This project builds two decoder-only Transformer language models from scratch for **Hindi** and **Nepali**. The project covers the complete pipeline from data collection and preparation to Transformer training and reasoning fine-tuning.
 
-* **Model H:** Hindi (`hi`), higher-resource language
-* **Model L:** Nepali (`ne`), lower-resource language
+```mermaid
+flowchart LR
+    A["Phase 1<br/>Data Collection<br/><br/>Crawling • Cleaning<br/>Deduplication • Tokenization"]
+    B["Phase 2<br/>Transformer Training<br/><br/>Decoder-only Transformer<br/>Hindi + Nepali"]
+    C["Phase 3<br/>Reasoning Fine-tuning<br/><br/>Reasoning Dataset<br/>Supervised Fine-tuning"]
+
+    A --> B --> C
+```
+
+The repository contains the code, data pipelines, training scripts, evaluation scripts, and model checkpoints for all three phases.
+
+## Models
+
+- **Model H:** Hindi (`hi`), higher-resource language
+- **Model L:** Nepali (`ne`), lower-resource language
 
 ## Links
 
