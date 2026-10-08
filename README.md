@@ -4,14 +4,8 @@
 
 This project builds two decoder-only Transformer language models from scratch for **Hindi** and **Nepali**. The project covers the complete pipeline from data collection and preparation to Transformer training and reasoning fine-tuning.
 
-```mermaid
-flowchart LR
-    A["Phase 1<br/>Data Collection<br/><br/>Crawling • Cleaning<br/>Deduplication • Tokenization"]
-    B["Phase 2<br/>Transformer Training<br/><br/>Decoder-only Transformer<br/>Hindi + Nepali"]
-    C["Phase 3<br/>Reasoning Fine-tuning<br/><br/>Reasoning Dataset<br/>Supervised Fine-tuning"]
+<img width="1096" height="469" alt="image" src="https://github.com/user-attachments/assets/0922f1c1-520e-458f-a67b-4cfe5a6bc957" />
 
-    A --> B --> C
-```
 
 The repository contains the code, data pipelines, training scripts, evaluation scripts, and model checkpoints for all three phases.
 
