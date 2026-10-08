@@ -1,0 +1,23 @@
+{
+  "train_loss": 5.42985144390422,
+  "train_perplexity": 228.11535498022704,
+  "val_loss": 5.39273510711619,
+  "val_perplexity": 219.80375095124296,
+  "test_loss": 5.3976761309305825,
+  "test_perplexity": 220.8924940569713,
+  "bleu": 0.0,
+  "chrf": 0.0,
+  "rouge_l": 0.0,
+  "div_repetition_rate_2": 0.0857843137254902,
+  "div_repetition_rate_3": 0.008928571428571428,
+  "div_repetition_rate_4": 0.0043859649122807015,
+  "div_distinct_1": 0.12446351931330472,
+  "div_distinct_2": 0.8774193548387097,
+  "div_distinct_3": 0.9655172413793104,
+  "repetition_rate_2": 0.0857843137254902,
+  "repetition_rate_3": 0.008928571428571428,
+  "repetition_rate_4": 0.0043859649122807015,
+  "distinct_1": 0.12446351931330472,
+  "distinct_2": 0.8774193548387097,
+  "distinct_3": 0.9655172413793104
+}

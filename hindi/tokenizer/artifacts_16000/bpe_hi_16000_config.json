@@ -1,0 +1,10 @@
+{
+  "type": "custom_bpe",
+  "num_merges": 15139,
+  "learned_merges": 15139,
+  "min_pair_frequency": 2,
+  "vocab_size": 14548,
+  "model_file": "hindi_bpe16k.pkl",
+  "vocab_file": "hindi_bpe16k_vocab.json",
+  "merges_file": "hindi_bpe16k_merges.txt"
+}

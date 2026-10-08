@@ -30,6 +30,8 @@ dependencies = [
     "pyarrow>=21.0.0",
     "tensorboard>=2.21.0",
     "torch>=2.8.0",
+    "sacrebleu>=2.6.0",
+    "rouge-score>=0.1.2",
 ]
 
 [project.scripts]

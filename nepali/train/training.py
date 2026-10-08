@@ -20,6 +20,7 @@ import math
 from pathlib import Path
 from typing import Dict, Any, Optional
 import math
+from nepali.train.model import create_model_from_config, count_trainable_parameters
 
 
 def get_cosine_schedule_with_warmup(
@@ -311,7 +312,7 @@ if __name__ == "__main__":
     
     from tokenizer_utils import load_tokenizer
     from dataset import create_dataloaders
-    from model import TransformerLM
+    from model import GPTLanguageModel
     
     config = load_config('nepali/configs/model_l.yaml')
     

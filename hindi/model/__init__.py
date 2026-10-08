@@ -1,1 +1,5 @@
-from model.model import TransformerLM
+"""Hindi model package - wraps GPTLanguageModel from root model."""
+
+from model import GPTLanguageModel
+
+__all__ = ["GPTLanguageModel"]

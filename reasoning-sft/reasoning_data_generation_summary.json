@@ -1,0 +1,205 @@
+{
+  "seed": 42,
+  "counts": {
+    "train": 50000,
+    "val": 5000,
+    "test": 5000
+  },
+  "hard_probability": {
+    "train": 0.3,
+    "val": 0.4,
+    "test": 0.6
+  },
+  "tasks": [
+    "comparison",
+    "ordering",
+    "transitive",
+    "implication",
+    "negation",
+    "conditional",
+    "analogy",
+    "categorization",
+    "common_sense",
+    "cause_effect",
+    "multi_hop",
+    "counting",
+    "temporal",
+    "spatial",
+    "rule_based"
+  ],
+  "num_tasks": 15,
+  "languages": {
+    "hi": {
+      "language": "hindi",
+      "seed": 42,
+      "splits": {
+        "train": {
+          "count": 50000,
+          "tasks": {
+            "transitive": 10258,
+            "multi_hop": 10260,
+            "comparison": 12611,
+            "ordering": 13006,
+            "counting": 3845,
+            "spatial": 2,
+            "negation": 2,
+            "analogy": 2,
+            "common_sense": 2,
+            "categorization": 2,
+            "temporal": 2,
+            "rule_based": 2,
+            "conditional": 2,
+            "implication": 2,
+            "cause_effect": 2
+          },
+          "difficulty": {
+            "easy": 31010,
+            "hard": 18990
+          },
+          "unique_questions": 50000
+        },
+        "val": {
+          "count": 5000,
+          "tasks": {
+            "counting": 748,
+            "multi_hop": 1020,
+            "cause_effect": 2,
+            "comparison": 1036,
+            "transitive": 1103,
+            "ordering": 1073,
+            "analogy": 2,
+            "implication": 2,
+            "negation": 2,
+            "common_sense": 2,
+            "rule_based": 2,
+            "temporal": 2,
+            "spatial": 2,
+            "conditional": 2,
+            "categorization": 2
+          },
+          "difficulty": {
+            "easy": 2852,
+            "hard": 2148
+          },
+          "unique_questions": 5000
+        },
+        "test": {
+          "count": 5000,
+          "tasks": {
+            "transitive": 1009,
+            "multi_hop": 1050,
+            "comparison": 1008,
+            "ordering": 1084,
+            "counting": 829,
+            "analogy": 2,
+            "temporal": 2,
+            "conditional": 2,
+            "rule_based": 2,
+            "implication": 2,
+            "common_sense": 2,
+            "cause_effect": 2,
+            "categorization": 2,
+            "spatial": 2,
+            "negation": 2
+          },
+          "difficulty": {
+            "easy": 1919,
+            "hard": 3081
+          },
+          "unique_questions": 5000
+        }
+      }
+    },
+    "ne": {
+      "language": "nepali",
+      "seed": 43,
+      "splits": {
+        "train": {
+          "count": 50000,
+          "tasks": {
+            "ordering": 12826,
+            "multi_hop": 10250,
+            "comparison": 12742,
+            "transitive": 10325,
+            "counting": 3837,
+            "conditional": 2,
+            "common_sense": 2,
+            "rule_based": 2,
+            "categorization": 2,
+            "spatial": 2,
+            "negation": 2,
+            "temporal": 2,
+            "implication": 2,
+            "analogy": 2,
+            "cause_effect": 2
+          },
+          "difficulty": {
+            "easy": 31166,
+            "hard": 18834
+          },
+          "unique_questions": 50000
+        },
+        "val": {
+          "count": 5000,
+          "tasks": {
+            "transitive": 1055,
+            "comparison": 1085,
+            "counting": 712,
+            "ordering": 1078,
+            "multi_hop": 1050,
+            "temporal": 2,
+            "rule_based": 2,
+            "negation": 2,
+            "analogy": 2,
+            "conditional": 2,
+            "spatial": 2,
+            "implication": 2,
+            "common_sense": 2,
+            "cause_effect": 2,
+            "categorization": 2
+          },
+          "difficulty": {
+            "easy": 2917,
+            "hard": 2083
+          },
+          "unique_questions": 5000
+        },
+        "test": {
+          "count": 5000,
+          "tasks": {
+            "transitive": 990,
+            "ordering": 1041,
+            "counting": 849,
+            "comparison": 1070,
+            "multi_hop": 1030,
+            "cause_effect": 2,
+            "analogy": 2,
+            "temporal": 2,
+            "common_sense": 2,
+            "implication": 2,
+            "conditional": 2,
+            "spatial": 2,
+            "categorization": 2,
+            "negation": 2,
+            "rule_based": 2
+          },
+          "difficulty": {
+            "hard": 3049,
+            "easy": 1951
+          },
+          "unique_questions": 5000
+        }
+      }
+    }
+  },
+  "total_examples": 120000,
+  "total_examples_by_split": {
+    "train": 100000,
+    "val": 10000,
+    "test": 10000
+  },
+  "total_examples_by_language": {
+    "hi": 60000,
+    "ne": 60000
+  }
+}
