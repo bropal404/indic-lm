@@ -1,13 +1,47 @@
-# Language Models and Agents (LMA) Individual Project
+# Hindi and Nepali Decoder-only LMs from Scratch
 
-**Gopal Kataria**
+**LMA Individual Project** | Gopal Kataria
 
-This project builds two decoder-only Transformer language models from scratch for **Hindi** and **Nepali**. The project covers the complete pipeline from data collection and preparation to Transformer training and reasoning fine-tuning.
+Two decoder-only Transformer language models, one for **Hindi** and one for **Nepali**, built ground-up. Data collection, tokenization, model code, pretraining, and reasoning fine-tuning are all implemented from **scratch** in this repository.
 
-<img width="1096" height="469" alt="image" src="https://github.com/user-attachments/assets/0922f1c1-520e-458f-a67b-4cfe5a6bc957" />
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Raw Hindi / Nepali<br/>Web Corpora] --> B[Cleaning, Language ID<br/>Dedup, Quality Filter]
+    B --> C[Subword Tokenizer<br/>Trained from Scratch]
+    C --> D[Tokenized Shards<br/>Train / Val Splits]
+    D --> E
+
+    subgraph E[Decoder-only Transformer - PyTorch]
+        direction LR
+        E1[Token Embedding<br/>+ Positional Enc.] --> E2[N x Block<br/>Causal MHA, Norm,<br/>FFN, Residual]
+        E2 --> E3[Final Norm<br/>+ LM Head]
+    end
+
+    E --> F[Pretraining<br/>Next-Token Prediction]
+    F --> G[Base Checkpoints<br/>hi / ne]
+    G --> H[Reasoning Fine-tuning<br/>CoT / Instruction Data]
+    H --> I[Evaluation<br/>PPL + Reasoning Benchmarks]
+```
+
+## What "from scratch" means here
+
+| Stage | What is built |
+|---|---|
+| **Data** | Custom crawl and ingestion, Unicode normalization for Devanagari, language ID filtering, near-duplicate removal, and heuristic quality scoring. Corpora are curated per language, not pulled from a prepackaged dataset. |
+| **Tokenizer** | Subword vocabulary trained from scratch on the cleaned corpora, tuned for conjuncts and matras to keep token fertility low in both languages. |
+| **Model** | Decoder-only Transformer in pure PyTorch: causal multi-head attention, positional encoding, normalization, residual blocks, and weight-tied LM head, all written at the tensor level. |
+| **Training loop** | Hand-written loop with mixed precision, gradient accumulation, gradient clipping, warmup + cosine LR schedule, and resumable checkpointing. |
+| **Pretraining** | Random initialization, next-token prediction, per-language held-out perplexity tracking. |
+| **Reasoning fine-tuning** | Post-training of the base models on curated instruction and chain-of-thought data, turning fluent generators into step-by-step reasoners in a low-resource setting. |
 
 
-The repository contains the code, data pipelines, training scripts, evaluation scripts, and model checkpoints for all three phases.
+## Phases
+
+1. **Pretraining:** base Hindi and Nepali LMs trained from random init.
+2. **Fine-tuning:** instruction adaptation of the base checkpoints.
+3. **Reasoning:** chain-of-thought post-training and benchmark evaluation.
 
 ## Models
 
